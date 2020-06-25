@@ -61,7 +61,7 @@ ESX.RegisterCommand = function(name, group, cb, allowConsole, suggestion)
 					end
 				end
 
-				if not error and command.suggestion.arguments then
+				if not error and command.suggestion.arguments and not command.suggestion.rawArgs then
 					local newArgs = {}
 
 					for k,v in ipairs(command.suggestion.arguments) do

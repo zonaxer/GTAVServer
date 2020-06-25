@@ -1,0 +1,199 @@
+<html>
+
+<head>
+	<link rel="stylesheet" href="style.css">
+	<script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+
+
+	<style>#admin,#exist,#server { display: none; }</style>
+
+	<script type="text/javascript">
+		let selected = 0;
+		$(function () {
+			$(document).keyup(function (e) {
+				if (e.keyCode == 27) {
+					$("#admin").fadeOut();
+					$.post('http://es_admin2/close', JSON.stringify({}));
+				}
+			});
+
+			window.addEventListener('message', function (event) {
+				if (event.data.type == "open") {
+					$('#notexist').css('display', 'block');
+					$('#exist').css('display', 'none');
+					$("#admin").fadeIn();
+					$('input').val("");
+
+					$('#list').empty();
+					for (let i in event.data.players) {
+						let player = event.data.players[i];
+						$('#list').append('<div class="player" id="player_' + player.id + '">' + player.name + '</div>');
+					}
+					let reports = JSON.parse(event.data.reports);
+					
+					for ( id in reports) {
+						//console.log(reports[id].message);
+						$('#reports').find('tbody').append(`<tr><td>${reports[id].fecha}</td><td>${reports[id].playerName}</td><td>${reports[id].message}</td></tr>`);
+					}
+
+					$(".player").click(function () {
+						let id = $(this).attr('id').replace('player_', '');
+						selected = parseInt(id);
+
+						$('.player').removeClass('selected');
+						$(this).addClass('selected');
+
+						$('#exist').find('h1').text(selected + ", " + $(this).text());
+
+						$('#notexist').css('display', 'none');
+						$('#exist').css('display', 'block');
+					});
+				}
+			});
+
+			$("#close").click(() => {
+				$("#admin").fadeOut();
+				$.post('http://es_admin2/close', JSON.stringify({}));
+			});
+
+			$("#select_users").click(() => {
+				$('#server').css('display', 'none');
+				$('#users').css('display', 'block');
+				$('#reports').css('display', 'none');
+				$(".tab").removeClass("selected");
+				$("#select_users").addClass("selected");
+				$("#select_users").blur();
+			});
+
+			$("#select_server").click(() => {
+				$('#users').css('display', 'none');
+				$('#server').css('display', 'block');
+				$('#reports').css('display', 'none');
+				$(".tab").removeClass("selected");
+				$("#select_server").addClass("selected");
+				$("#select_server").blur();
+			});
+
+			$("#select_reports").click(() => {
+				$('#users').css('display', 'none');
+				$('#server').css('display', 'none');
+				$('#reports').css('display', 'block');
+				$(".tab").removeClass("selected");
+				$("#select_reports").addClass("selected");
+				$("#select_reports").blur();
+			});
+
+			$("#slay_all").click(function () { $.post('http://es_admin2/quick', JSON.stringify({ id: selected, type: 'slay_all' })); $(this).blur(); });
+			$("#bring_all").click(function () { $.post('http://es_admin2/quick', JSON.stringify({ id: selected, type: 'bring_all' })); $(this).blur(); });
+			$("#slap_all").click(function () { $.post('http://es_admin2/quick', JSON.stringify({ id: selected, type: 'slap_all' })); $(this).blur(); });
+
+
+			$("#slay").click(function () { $.post('http://es_admin2/quick', JSON.stringify({ id: selected, type: 'slay' })); $(this).blur(); });
+			$("#kick").click(function () { $.post('http://es_admin2/quick', JSON.stringify({ id: selected, type: 'kick' })); $(this).blur(); });
+			$("#noclip").click(function () { $.post('http://es_admin2/quick', JSON.stringify({ id: selected, type: 'noclip' })); $(this).blur(); });
+			$("#freeze").click(function () { $.post('http://es_admin2/quick', JSON.stringify({ id: selected, type: 'freeze' })); $(this).blur(); });
+			$("#bring").click(function () { $.post('http://es_admin2/quick', JSON.stringify({ id: selected, type: 'bring' })); $(this).blur(); });
+			$("#goto").click(function () { $.post('http://es_admin2/quick', JSON.stringify({ id: selected, type: 'goto' })); $(this).blur(); });
+			$("#slap").click(function () { $.post('http://es_admin2/quick', JSON.stringify({ id: selected, type: 'slap' })); $(this).blur(); });
+			$("#crash").click(function () { $.post('http://es_admin2/quick', JSON.stringify({ id: selected, type: 'crash' })); $(this).blur(); });
+			$("#ban").click(function () { $.post('http://es_admin2/quick', JSON.stringify({ id: selected, type: 'ban' })); $(this).blur(); });
+			$("#setgroup").click(function () { $.post('http://es_admin2/set', JSON.stringify({ user: selected, type: 'group', param: $("#newgroup").val() })); $(this).blur(); });
+			$("#setlevel").click(function () { $.post('http://es_admin2/set', JSON.stringify({ user: selected, type: 'level', param: $("#newlevel").val() })); $(this).blur(); });
+			$("#setmoney").click(function () { $.post('http://es_admin2/set', JSON.stringify({ user: selected, type: 'money', param: $("#newmoney").val() })); $(this).blur(); });
+			$("#setbank").click(function () { $.post('http://es_admin2/set', JSON.stringify({ user: selected, type: 'bank', param: $("#newbank").val() })); $(this).blur(); });
+			$("#setblackmoney").click(function () { $.post('http://es_admin2/set', JSON.stringify({ user: selected, type: 'black_money', param: $("#newblackmoney").val() })); $(this).blur(); });
+
+			$('button').click(function () { $(this).blur(); });
+		});
+	</script>
+</head>
+
+<body>
+	<div id="admin">
+		<div class="topbar">
+			<p>Admin Menu</p>
+			<div id="close">&#10060;</div>
+		</div>
+
+		<div id="tabs">
+			<button id="select_users" class="tab selected">Usuarios</button>
+			<button id="select_server" class="tab">Servidor</button>
+			<button id="select_reports" class="tab">Reportes</button>
+		</div>
+
+		<div id="main">
+			<div id="users">
+				<div id="list">
+				</div>
+				<div id="selected">
+					<div id="notexist">
+						<h1>Selecciona un jugador</h1>
+					</div>
+					<div id="exist">
+						<h1>Zonaxer</h1>
+						<div id="quick">
+							<h3>Opciones Rapidas</h3>
+							<button class="quick" id="slay">Slay</button>
+							<button class="quick" id="kick">Kick</button>
+							<button class="quick" id="noclip">Noclip</button>
+							<button class="quick" id="freeze">Congelar</button>
+							<button class="quick" id="bring">Traer</button>
+							<button class="quick" id="goto">Ir</button>
+							<button class="quick" id="slap">Bofetada</button>
+							<button class="quick" id="crash">Crash</button>
+							<button class="quick" id="ban">Ban</button>
+						</div>
+						<div id="set">
+							<h3>Atributos</h3>
+							<div class="group_set">
+								<label>Grupo</label>
+								<input id="newgroup" type="text" placeholder="nuevo grupo"></input>
+								<button id="setgroup">Asignar</button>
+							</div>
+							<div class="group_set">
+								<label>Efectivo</label>
+								<input id="newmoney" type="text" placeholder="dinero"></input>
+								<button id="setmoney">Asignar</button>
+							</div>
+							<div class="group_set">
+								<label>Banco</label>
+								<input id="newbank" type="text" placeholder="banco"></input>
+								<button id="setbank">Asignar</button>
+							</div>
+							<div class="group_set">
+								<label>Dinero Negro</label>
+								<input id="newblackmoney" type="text" placeholder="dinero negro"></input>
+								<button id="setblackmoney">Asignar</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="server">
+				<h3>Opciones Rapidas</h3>
+				<button class="quick" id="slay_all">Slay</button>
+				<button class="quick" id="bring_all">Traer todos</button>
+				<button class="quick" id="slap_all">Slap</button>
+			</div>
+			<div id="reports">
+				<h3>Reportes</h3>
+				<table id="reports" class="table table-dark">
+					<thead>
+					<tr>
+						<th>Fecha</th>
+						<th>Nombre</th>
+						<th>Mensaje</th>
+					</tr>
+				</thead>
+				<tbody>
+
+
+				</tbody>
+
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

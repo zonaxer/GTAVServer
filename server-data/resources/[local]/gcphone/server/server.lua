@@ -21,7 +21,7 @@ local ESX = nil
 
 TriggerEvent('esx:getSharedObject', function(obj) 
     ESX = obj 
-    print('ha cargado el ESX')
+    --[[
     ESX.RegisterServerCallback('gcphone:getItemAmount', function(source, cb, item)
         print('gcphone:getItemAmount call item : ' .. item)
         local xPlayer = ESX.GetPlayerFromId(source)
@@ -31,7 +31,7 @@ TriggerEvent('esx:getSharedObject', function(obj)
         else
             cb(items.count)
         end
-    end)
+    end)]]--
 end)
 
 
@@ -79,7 +79,7 @@ function getPlayerID(source)
 			break
 		end
 	end
-    print('MANDA IDENT '..identifier)
+    
     return identifier
 
 end
@@ -100,8 +100,6 @@ function getOrGeneratePhoneNumber (sourcePlayer, identifier, cb)
             ['@myPhoneNumber'] = myPhoneNumber,
             ['@identifier'] = identifier
         }, function ()
-            print('IDENTIFIER '..identifier)
-            print('NUMERO DE TELEFONO'..myPhoneNumber)
             cb(myPhoneNumber)
         end)
     else

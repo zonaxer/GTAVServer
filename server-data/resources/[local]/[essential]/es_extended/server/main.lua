@@ -31,7 +31,7 @@ function onPlayerJoined(playerId)
 					loadESXPlayer(identifier, playerId)
 				else
 					local accounts = {}
-
+					
 					for account,money in pairs(Config.StartingAccountMoney) do
 						accounts[account] = money
 					end
@@ -90,6 +90,7 @@ function loadESXPlayer(identifier, playerId)
 		MySQL.Async.fetchAll('SELECT accounts, job, job_grade, `group`, loadout, position, inventory FROM users WHERE identifier = @identifier', {
 			['@identifier'] = identifier
 		}, function(result)
+			
 			local job, grade, jobObject, gradeObject = result[1].job, tostring(result[1].job_grade)
 			local foundAccounts, foundItems = {}, {}
 

@@ -43,7 +43,8 @@ function getSourceFromIdentifier(identifier, cb)
     local users = ESX.GetPlayers()
     
     for k , user in pairs(users) do
-        if (user.getIdentifier ~= nil and user.getIdentifier() == identifier) or (user.identifier == identifier) then
+        local xplayer = ESX.GetPlayerFromId(user)
+        if (xplayer.identifier ~= nil and xplayer.identifier == identifier) or (xplayer.identifier == identifier) then
             cb(k)
             return
         end

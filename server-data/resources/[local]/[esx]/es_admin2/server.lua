@@ -112,8 +112,8 @@ AddEventHandler('es_admin:quick', function(id, type)
 		if type == "noclip" then TriggerClientEvent('es_admin:quick', id, type) end
 		if type == "freeze" then TriggerClientEvent('es_admin:quick', id, type) end
 		if type == "crash" then TriggerClientEvent('es_admin:quick', id, type) end
-		if type == "bring" then TriggerClientEvent('es_admin:quick', id, type, Source) end
-		if type == "goto" then TriggerClientEvent('es_admin:quick', Source, type, id) end
+		if type == "bring" then TriggerClientEvent('es_admin:quick', id, type, src) end
+		if type == "goto" then TriggerClientEvent('es_admin:quick', src, type, id) end
 		if type == "slap" then TriggerClientEvent('es_admin:quick', id, type) end
 		if type == "slay" then TriggerClientEvent('es_admin:quick', id, type) end
 		if type == "kick" then DropPlayer(id, 'Kicked by es_admin GUI') end

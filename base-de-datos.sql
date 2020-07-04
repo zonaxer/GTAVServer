@@ -1,54 +1,26 @@
-CREATE DATABASE  IF NOT EXISTS `es_extended` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE DATABASE  IF NOT EXISTS `es_extended`;
 USE `es_extended`;
--- MySQL dump 10.13  Distrib 8.0.20, for Win64 (x86_64)
---
--- Host: localhost    Database: es_extended
--- ------------------------------------------------------
--- Server version	5.7.30-log
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Table structure for table `addon_account`
---
 
 DROP TABLE IF EXISTS `addon_account`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+
 CREATE TABLE `addon_account` (
   `name` varchar(60) NOT NULL,
   `label` varchar(100) NOT NULL,
   `shared` int(11) NOT NULL,
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `addon_account`
---
 
 LOCK TABLES `addon_account` WRITE;
-/*!40000 ALTER TABLE `addon_account` DISABLE KEYS */;
+
 INSERT INTO `addon_account` VALUES ('property_black_money','Argent Sale Propriété',0),('society_ambulance','EMS',1),('society_cardealer','Concessionnaire',1),('society_police','Police',1);
-/*!40000 ALTER TABLE `addon_account` ENABLE KEYS */;
+
 UNLOCK TABLES;
 
---
--- Table structure for table `addon_account_data`
---
 
 DROP TABLE IF EXISTS `addon_account_data`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+
 CREATE TABLE `addon_account_data` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `account_name` varchar(100) DEFAULT NULL,
@@ -58,50 +30,36 @@ CREATE TABLE `addon_account_data` (
   UNIQUE KEY `index_addon_account_data_account_name_owner` (`account_name`,`owner`),
   KEY `index_addon_account_data_account_name` (`account_name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `addon_account_data`
---
 
 LOCK TABLES `addon_account_data` WRITE;
-/*!40000 ALTER TABLE `addon_account_data` DISABLE KEYS */;
+
 INSERT INTO `addon_account_data` VALUES (1,'society_ambulance',0,NULL),(2,'society_cardealer',0,NULL),(3,'society_police',0,NULL),(4,'property_black_money',0,'c56ec46dc93cd5f0c2821cbd3ec1911f05367b4d');
-/*!40000 ALTER TABLE `addon_account_data` ENABLE KEYS */;
+
 UNLOCK TABLES;
 
---
--- Table structure for table `addon_inventory`
---
 
 DROP TABLE IF EXISTS `addon_inventory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+
 CREATE TABLE `addon_inventory` (
   `name` varchar(60) NOT NULL,
   `label` varchar(100) NOT NULL,
   `shared` int(11) NOT NULL,
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `addon_inventory`
---
 
 LOCK TABLES `addon_inventory` WRITE;
-/*!40000 ALTER TABLE `addon_inventory` DISABLE KEYS */;
+
 INSERT INTO `addon_inventory` VALUES ('property','Propriété',0),('society_ambulance','EMS',1),('society_cardealer','Concesionnaire',1),('society_police','Policia',1);
-/*!40000 ALTER TABLE `addon_inventory` ENABLE KEYS */;
+
 UNLOCK TABLES;
 
---
--- Table structure for table `addon_inventory_items`
---
+
 
 DROP TABLE IF EXISTS `addon_inventory_items`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+
+
 CREATE TABLE `addon_inventory_items` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `inventory_name` varchar(100) NOT NULL,
@@ -113,24 +71,17 @@ CREATE TABLE `addon_inventory_items` (
   KEY `index_addon_inventory_items_inventory_name_name_owner` (`inventory_name`,`name`,`owner`),
   KEY `index_addon_inventory_inventory_name` (`inventory_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `addon_inventory_items`
---
+
+
 
 LOCK TABLES `addon_inventory_items` WRITE;
-/*!40000 ALTER TABLE `addon_inventory_items` DISABLE KEYS */;
-/*!40000 ALTER TABLE `addon_inventory_items` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Table structure for table `billing`
---
+
 
 DROP TABLE IF EXISTS `billing`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+
 CREATE TABLE `billing` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `identifier` varchar(40) NOT NULL,
@@ -141,73 +92,47 @@ CREATE TABLE `billing` (
   `amount` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `billing`
---
 
 LOCK TABLES `billing` WRITE;
-/*!40000 ALTER TABLE `billing` DISABLE KEYS */;
-/*!40000 ALTER TABLE `billing` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Table structure for table `cardealer_vehicles`
---
+
 
 DROP TABLE IF EXISTS `cardealer_vehicles`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+
 CREATE TABLE `cardealer_vehicles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `vehicle` varchar(255) NOT NULL,
   `price` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `cardealer_vehicles`
---
 
 LOCK TABLES `cardealer_vehicles` WRITE;
-/*!40000 ALTER TABLE `cardealer_vehicles` DISABLE KEYS */;
-/*!40000 ALTER TABLE `cardealer_vehicles` ENABLE KEYS */;
+
 UNLOCK TABLES;
 
---
--- Table structure for table `datastore`
---
+
 
 DROP TABLE IF EXISTS `datastore`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+
 CREATE TABLE `datastore` (
   `name` varchar(60) NOT NULL,
   `label` varchar(100) NOT NULL,
   `shared` int(11) NOT NULL,
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `datastore`
---
 
 LOCK TABLES `datastore` WRITE;
-/*!40000 ALTER TABLE `datastore` DISABLE KEYS */;
+
 INSERT INTO `datastore` VALUES ('property','Propriété',0),('society_ambulance','EMS',1),('society_police','Policia',1);
-/*!40000 ALTER TABLE `datastore` ENABLE KEYS */;
+
 UNLOCK TABLES;
 
---
--- Table structure for table `datastore_data`
---
 
 DROP TABLE IF EXISTS `datastore_data`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+
 CREATE TABLE `datastore_data` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(60) NOT NULL,
@@ -217,25 +142,17 @@ CREATE TABLE `datastore_data` (
   UNIQUE KEY `index_datastore_data_name_owner` (`name`,`owner`),
   KEY `index_datastore_data_name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `datastore_data`
---
 
 LOCK TABLES `datastore_data` WRITE;
-/*!40000 ALTER TABLE `datastore_data` DISABLE KEYS */;
+
 INSERT INTO `datastore_data` VALUES (1,'society_police',NULL,'{}'),(2,'society_ambulance',NULL,'{}');
-/*!40000 ALTER TABLE `datastore_data` ENABLE KEYS */;
+
 UNLOCK TABLES;
 
---
--- Table structure for table `fine_types`
---
 
 DROP TABLE IF EXISTS `fine_types`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+
 CREATE TABLE `fine_types` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `label` varchar(255) DEFAULT NULL,
@@ -243,25 +160,18 @@ CREATE TABLE `fine_types` (
   `category` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `fine_types`
---
 
 LOCK TABLES `fine_types` WRITE;
-/*!40000 ALTER TABLE `fine_types` DISABLE KEYS */;
+
 INSERT INTO `fine_types` VALUES (1,'Mal uso de claxon',250,0),(2,'Giro indebido',250,0),(3,'Circular en sentido contrario',500,0),(4,'Estacionar en zonas no habilitadas y obstruir circulación',250,0),(5,'Ignorar las señales de transito',250,0),(6,'Saltarse un semaforo',400,0),(7,'No respetar la distancia de seguridad',250,0),(8,'No ceder el paso a vehiculos de emergencias',1000,0),(9,'Realizar adelantamiento indebido',400,0),(10,'Circular marcha atras',600,0),(11,'Ignorar señales de los agentes qeu regulan la circulacion',1000,0),(12,'Conducir un vehiculo en malas condiciones',250,0),(13,'Saltar u omitir un control de trafico',2000,0),(14,'Exceso de velocidad en vias urbanas',600,0),(15,'Exceso de velocidad en vias secundarias',400,0),(16,'Exceso de velocidad en autovias',500,0),(17,'Conduccion temeraria o maniobra agresiva',2000,0),(18,'Conducir bajo los efectos de las drogas o alcohol',2500,0),(19,'Circular por zonas no habilitadas para ello',400,0),(20,'Circular sin las luces de posicion',250,0),(21,'Circular sin el casco con motocicleta',400,0),(22,'Multas de Radar',500,0),(23,'Alteracion del orden publico',1500,1),(24,'Racismo',3000,1),(25,'Faltas de respeto a otro civil',1000,1),(26,'Dañar mobiliario urbano',2000,1),(27,'Suplatancion de identidad',6000,1),(28,'Implementacion en una organizacion ilegal',5000,1),(29,'Circular por la via publica con el rostro oculto',5000,1),(30,'Circular en via publica desnudo o semidesnudo',1000,1),(31,'Circular en via publica sin camiseta',400,1),(32,'Fraude o engaño',20000,1),(33,'Negativa a identificarse',10000,1),(34,'Obstruccion a la justicia',8000,1),(35,'Robo de vehiculo',2500,2),(36,'Robo mediante intimidacion a otro civil',7000,2),(37,'Robo con violencia a otro civil',10000,2),(38,'Robo menor',7000,2),(39,'Robo mayor',20000,2),(40,'Robo a empresas',50000,2),(41,'Robo a entidades federales',120000,2),(42,'Allanamiento de morada o propiedad privada',7000,2),(43,'Posesion de arma blanca ilegal',7000,3),(44,'Posesion de arma de fuego ilegal',10000,3),(45,'Posesion de municion ilegal',7000,3),(46,'Trafico de armas o municion',10000,3),(47,'Posesion de dinero negro',5000,3),(48,'Marihuana',100,4),(49,'Cocaina',130,4),(50,'Cristal',160,4),(51,'Opio',145,4),(52,'Metanfetamina',160,4),(53,'Trafico de drogas',15000,4),(54,'Consumo de drogas en via publica',1500,4),(55,'Intento de secuestro',15000,5),(56,'Secustro a un civil',20000,5),(57,'Intento de homicidio',15000,5),(58,'Homicidio',25000,5),(59,'Amenaza o extorsion a un ciudadano',5000,5),(60,'Omision de deber de socorro',2500,5);
-/*!40000 ALTER TABLE `fine_types` ENABLE KEYS */;
+
 UNLOCK TABLES;
 
---
--- Table structure for table `items`
---
+
 
 DROP TABLE IF EXISTS `items`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+
 CREATE TABLE `items` (
   `name` varchar(50) NOT NULL,
   `label` varchar(50) NOT NULL,
@@ -270,25 +180,15 @@ CREATE TABLE `items` (
   `can_remove` tinyint(4) NOT NULL DEFAULT '1',
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `items`
---
 
 LOCK TABLES `items` WRITE;
-/*!40000 ALTER TABLE `items` DISABLE KEYS */;
+
 INSERT INTO `items` VALUES ('bandage','Benda',2,0,1),('bread','Pan',1,0,1),('medikit','Botiquin',2,0,1),('water','Agua',1,0,1);
-/*!40000 ALTER TABLE `items` ENABLE KEYS */;
+
 UNLOCK TABLES;
 
---
--- Table structure for table `job_grades`
---
-
 DROP TABLE IF EXISTS `job_grades`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+
 CREATE TABLE `job_grades` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `job_name` varchar(50) DEFAULT NULL,
@@ -300,49 +200,36 @@ CREATE TABLE `job_grades` (
   `skin_female` longtext NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `job_grades`
---
+
 
 LOCK TABLES `job_grades` WRITE;
-/*!40000 ALTER TABLE `job_grades` DISABLE KEYS */;
+
 INSERT INTO `job_grades` VALUES (1,'unemployed',0,'unemployed','Unemployed',200,'{}','{}'),(2,'cardealer',0,'recruit','Recrue',10,'{}','{}'),(3,'cardealer',1,'novice','Novice',25,'{}','{}'),(4,'cardealer',2,'experienced','Experimente',40,'{}','{}'),(5,'cardealer',3,'boss','Patron',0,'{}','{}'),(6,'police',0,'recruit','Recluta',20,'{}','{}'),(7,'police',1,'officer','Oficial',40,'{}','{}'),(8,'police',2,'sergeant','Sargento',60,'{}','{}'),(9,'police',3,'lieutenant','Teniente',85,'{}','{}'),(10,'police',4,'boss','Comisario',100,'{}','{}'),(11,'ambulance',0,'ambulance','Residente',20,'{\"tshirt_2\":0,\"hair_color_1\":5,\"glasses_2\":3,\"shoes\":9,\"torso_2\":3,\"hair_color_2\":0,\"pants_1\":24,\"glasses_1\":4,\"hair_1\":2,\"sex\":0,\"decals_2\":0,\"tshirt_1\":15,\"helmet_1\":8,\"helmet_2\":0,\"arms\":92,\"face\":19,\"decals_1\":60,\"torso_1\":13,\"hair_2\":0,\"skin\":34,\"pants_2\":5}','{\"tshirt_2\":3,\"decals_2\":0,\"glasses\":0,\"hair_1\":2,\"torso_1\":73,\"shoes\":1,\"hair_color_2\":0,\"glasses_1\":19,\"skin\":13,\"face\":6,\"pants_2\":5,\"tshirt_1\":75,\"pants_1\":37,\"helmet_1\":57,\"torso_2\":0,\"arms\":14,\"sex\":1,\"glasses_2\":0,\"decals_1\":0,\"hair_2\":0,\"helmet_2\":0,\"hair_color_1\":0}'),(12,'ambulance',1,'doctor','Adjunto',40,'{\"tshirt_2\":0,\"hair_color_1\":5,\"glasses_2\":3,\"shoes\":9,\"torso_2\":3,\"hair_color_2\":0,\"pants_1\":24,\"glasses_1\":4,\"hair_1\":2,\"sex\":0,\"decals_2\":0,\"tshirt_1\":15,\"helmet_1\":8,\"helmet_2\":0,\"arms\":92,\"face\":19,\"decals_1\":60,\"torso_1\":13,\"hair_2\":0,\"skin\":34,\"pants_2\":5}','{\"tshirt_2\":3,\"decals_2\":0,\"glasses\":0,\"hair_1\":2,\"torso_1\":73,\"shoes\":1,\"hair_color_2\":0,\"glasses_1\":19,\"skin\":13,\"face\":6,\"pants_2\":5,\"tshirt_1\":75,\"pants_1\":37,\"helmet_1\":57,\"torso_2\":0,\"arms\":14,\"sex\":1,\"glasses_2\":0,\"decals_1\":0,\"hair_2\":0,\"helmet_2\":0,\"hair_color_1\":0}'),(13,'ambulance',2,'chief_doctor','Jefe de Servicio',60,'{\"tshirt_2\":0,\"hair_color_1\":5,\"glasses_2\":3,\"shoes\":9,\"torso_2\":3,\"hair_color_2\":0,\"pants_1\":24,\"glasses_1\":4,\"hair_1\":2,\"sex\":0,\"decals_2\":0,\"tshirt_1\":15,\"helmet_1\":8,\"helmet_2\":0,\"arms\":92,\"face\":19,\"decals_1\":60,\"torso_1\":13,\"hair_2\":0,\"skin\":34,\"pants_2\":5}','{\"tshirt_2\":3,\"decals_2\":0,\"glasses\":0,\"hair_1\":2,\"torso_1\":73,\"shoes\":1,\"hair_color_2\":0,\"glasses_1\":19,\"skin\":13,\"face\":6,\"pants_2\":5,\"tshirt_1\":75,\"pants_1\":37,\"helmet_1\":57,\"torso_2\":0,\"arms\":14,\"sex\":1,\"glasses_2\":0,\"decals_1\":0,\"hair_2\":0,\"helmet_2\":0,\"hair_color_1\":0}'),(14,'ambulance',3,'boss','Director',80,'{\"tshirt_2\":0,\"hair_color_1\":5,\"glasses_2\":3,\"shoes\":9,\"torso_2\":3,\"hair_color_2\":0,\"pants_1\":24,\"glasses_1\":4,\"hair_1\":2,\"sex\":0,\"decals_2\":0,\"tshirt_1\":15,\"helmet_1\":8,\"helmet_2\":0,\"arms\":92,\"face\":19,\"decals_1\":60,\"torso_1\":13,\"hair_2\":0,\"skin\":34,\"pants_2\":5}','{\"tshirt_2\":3,\"decals_2\":0,\"glasses\":0,\"hair_1\":2,\"torso_1\":73,\"shoes\":1,\"hair_color_2\":0,\"glasses_1\":19,\"skin\":13,\"face\":6,\"pants_2\":5,\"tshirt_1\":75,\"pants_1\":37,\"helmet_1\":57,\"torso_2\":0,\"arms\":14,\"sex\":1,\"glasses_2\":0,\"decals_1\":0,\"hair_2\":0,\"helmet_2\":0,\"hair_color_1\":0}');
-/*!40000 ALTER TABLE `job_grades` ENABLE KEYS */;
+
 UNLOCK TABLES;
 
---
--- Table structure for table `jobs`
---
+
 
 DROP TABLE IF EXISTS `jobs`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+
 CREATE TABLE `jobs` (
   `name` varchar(50) NOT NULL,
   `label` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `jobs`
---
+
 
 LOCK TABLES `jobs` WRITE;
-/*!40000 ALTER TABLE `jobs` DISABLE KEYS */;
+
 INSERT INTO `jobs` VALUES ('ambulance','EMS'),('cardealer','Concessionnaire'),('police','LSPD'),('unemployed','Unemployed');
-/*!40000 ALTER TABLE `jobs` ENABLE KEYS */;
+
 UNLOCK TABLES;
 
---
--- Table structure for table `owned_properties`
---
 
 DROP TABLE IF EXISTS `owned_properties`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+
 CREATE TABLE `owned_properties` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -351,24 +238,16 @@ CREATE TABLE `owned_properties` (
   `owner` varchar(60) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `owned_properties`
---
 
 LOCK TABLES `owned_properties` WRITE;
-/*!40000 ALTER TABLE `owned_properties` DISABLE KEYS */;
-/*!40000 ALTER TABLE `owned_properties` ENABLE KEYS */;
+
 UNLOCK TABLES;
 
---
--- Table structure for table `owned_vehicles`
---
+
 
 DROP TABLE IF EXISTS `owned_vehicles`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+
 CREATE TABLE `owned_vehicles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `plate` varchar(12) NOT NULL,
@@ -386,20 +265,11 @@ CREATE TABLE `owned_vehicles` (
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `vehsowned` (`owner`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `owned_vehicles`
---
 
 LOCK TABLES `owned_vehicles` WRITE;
-/*!40000 ALTER TABLE `owned_vehicles` DISABLE KEYS */;
-/*!40000 ALTER TABLE `owned_vehicles` ENABLE KEYS */;
+
 UNLOCK TABLES;
 
---
--- Table structure for table `phone_app_chat`
---
 
 DROP TABLE IF EXISTS `phone_app_chat`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;

@@ -663,8 +663,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `vehicles`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `vehicles` (
   `name` varchar(60) NOT NULL,
   `model` varchar(60) NOT NULL,

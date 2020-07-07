@@ -224,7 +224,7 @@ end)
 -- Check Money for Pounded Aircrafts
 ESX.RegisterServerCallback('esx_advancedgarage:checkMoneyAircrafts', function(source, cb)
 	local xPlayer = ESX.GetPlayerFromId(source)
-	if xPlayer.get('money') >= Config.AircraftPoundPrice then
+	if xPlayer.getMoney() >= Config.AircraftPoundPrice then
 		cb(true)
 	else
 		cb(false)
@@ -234,7 +234,7 @@ end)
 -- Check Money for Pounded Boats
 ESX.RegisterServerCallback('esx_advancedgarage:checkMoneyBoats', function(source, cb)
 	local xPlayer = ESX.GetPlayerFromId(source)
-	if xPlayer.get('money') >= Config.BoatPoundPrice then
+	if xPlayer.getMoney() >= Config.BoatPoundPrice then
 		cb(true)
 	else
 		cb(false)
@@ -244,7 +244,7 @@ end)
 -- Check Money for Pounded Cars
 ESX.RegisterServerCallback('esx_advancedgarage:checkMoneyCars', function(source, cb)
 	local xPlayer = ESX.GetPlayerFromId(source)
-	if xPlayer.get('money') >= Config.CarPoundPrice then
+	if xPlayer.getMoney() >= Config.CarPoundPrice then
 		cb(true)
 	else
 		cb(false)
@@ -254,7 +254,7 @@ end)
 -- Check Money for Pounded Policing
 ESX.RegisterServerCallback('esx_advancedgarage:checkMoneyPolicing', function(source, cb)
 	local xPlayer = ESX.GetPlayerFromId(source)
-	if xPlayer.get('money') >= Config.PolicingPoundPrice then
+	if xPlayer.getMoney() >= Config.PolicingPoundPrice then
 		cb(true)
 	else
 		cb(false)
@@ -264,7 +264,7 @@ end)
 -- Check Money for Pounded Ambulance
 ESX.RegisterServerCallback('esx_advancedgarage:checkMoneyAmbulance', function(source, cb)
 	local xPlayer = ESX.GetPlayerFromId(source)
-	if xPlayer.get('money') >= Config.AmbulancePoundPrice then
+	if xPlayer.getMoney() >= Config.AmbulancePoundPrice then
 		cb(true)
 	else
 		cb(false)
@@ -363,8 +363,10 @@ ESX.RegisterServerCallback('esx_advancedgarage:getImpoundedCar', function(source
 	}, function(data) 
 		local pound = false
 		local time = os.time()
+		
 		for _,v in pairs(data) do
 			--print(tostring(time-v.last_pound))
+			
 			if v.last_pound == nil then
 				pound = true
 			else
@@ -373,7 +375,6 @@ ESX.RegisterServerCallback('esx_advancedgarage:getImpoundedCar', function(source
 				end
 			end
 		end
-		
 		cb(pound)
 	end)
 end)

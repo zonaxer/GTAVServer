@@ -4,7 +4,8 @@ USE `es_extended`;
 --
 -- Host: localhost    Database: es_extended
 -- ------------------------------------------------------
--- Server version 5.7.30-log
+
+-- Server version	5.7.30-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -66,7 +67,9 @@ CREATE TABLE `addon_account_data` (
 
 LOCK TABLES `addon_account_data` WRITE;
 /*!40000 ALTER TABLE `addon_account_data` DISABLE KEYS */;
-INSERT INTO `addon_account_data` VALUES (1,'society_ambulance',0,NULL),(2,'society_cardealer',0,NULL),(3,'society_police',0,NULL),(4,'property_black_money',0,'c56ec46dc93cd5f0c2821cbd3ec1911f05367b4d');
+
+INSERT INTO `addon_account_data` VALUES (1,'society_ambulance',0,NULL),(2,'society_cardealer',0,NULL),(3,'society_police',0,NULL);
+
 /*!40000 ALTER TABLE `addon_account_data` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -334,6 +337,32 @@ LOCK TABLES `jobs` WRITE;
 /*!40000 ALTER TABLE `jobs` DISABLE KEYS */;
 INSERT INTO `jobs` VALUES ('ambulance','EMS'),('cardealer','Concessionnaire'),('police','LSPD'),('unemployed','Unemployed');
 /*!40000 ALTER TABLE `jobs` ENABLE KEYS */;
+
+UNLOCK TABLES;
+
+--
+-- Table structure for table `licenses`
+--
+
+DROP TABLE IF EXISTS `licenses`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `licenses` (
+  `type` varchar(60) NOT NULL,
+  `label` varchar(60) NOT NULL,
+  PRIMARY KEY (`type`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `licenses`
+--
+
+LOCK TABLES `licenses` WRITE;
+/*!40000 ALTER TABLE `licenses` DISABLE KEYS */;
+INSERT INTO `licenses` VALUES ('dmv','Examen'),('drive','Permiso de conducir'),('drive_bike','Permiso de moto'),('drive_truck','Permiso de camión');
+/*!40000 ALTER TABLE `licenses` ENABLE KEYS */;
+
 UNLOCK TABLES;
 
 --
@@ -385,7 +414,8 @@ CREATE TABLE `owned_vehicles` (
   PRIMARY KEY (`plate`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `vehsowned` (`owner`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -700,6 +730,30 @@ LOCK TABLES `twitter_tweets` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `user_licenses`
+--
+
+DROP TABLE IF EXISTS `user_licenses`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `user_licenses` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(60) NOT NULL,
+  `owner` varchar(40) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_licenses`
+--
+
+LOCK TABLES `user_licenses` WRITE;
+/*!40000 ALTER TABLE `user_licenses` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_licenses` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `users`
 --
 
@@ -823,4 +877,5 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-04  0:21:43
+-- Dump completed on 2020-07-07 23:59:34
+

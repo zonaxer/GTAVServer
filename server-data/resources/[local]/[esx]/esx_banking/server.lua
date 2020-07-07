@@ -8,7 +8,7 @@ TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 RegisterServerEvent('bank:deposit')
 AddEventHandler('bank:deposit', function(amount)
     local _source = source
-
+    
     local xPlayer = ESX.GetPlayerFromId(_source)
     if amount == nil or amount <= 0 then
         TriggerClientEvent('chatMessage', _source, _U('invalid_amount'))

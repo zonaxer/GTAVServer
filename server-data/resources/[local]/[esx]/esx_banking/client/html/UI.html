@@ -218,7 +218,7 @@
     		$('.btn-sign-out').click(function(){
 	            $('#general, #waiting, #transferUI, #withdrawUI, #depositUI, #topbar').hide();
 	            $('body').removeClass("active");
-	            $.post('http://new_banking/NUIFocusOff', JSON.stringify({}));
+	            $.post('http://esx_banking/NUIFocusOff', JSON.stringify({}));
 	        })
 	        $('.back').click(function(){
 	            $('#depositUI, #withdrawUI, #transferUI').hide();
@@ -237,7 +237,7 @@
 	            $('#transferUI').show();
 	        })
 			$('#esx_invest').click(function(){
-				$.post('http://new_banking/esx_invest', "{}")
+				$.post('http://esx_banking/esx_invest', "{}")
 	        })
 	        $('#fingerprint-content').click(function(){
 	            $('.fingerprint-active, .fingerprint-bar').addClass("active")
@@ -250,7 +250,7 @@
 	        })
 	        $("#deposit1").submit(function(e) {
 		        e.preventDefault(); // Prevent form from submitting
-		        $.post('http://new_banking/deposit', JSON.stringify({
+		        $.post('http://esx_banking/deposit', JSON.stringify({
 		            amount: $("#amount").val()
 		        }));
 				$('#depositUI').hide();
@@ -259,7 +259,7 @@
 			});
 			$("#transfer1").submit(function(e) {
 		        e.preventDefault(); // Prevent form from submitting
-		        $.post('http://new_banking/transfer', JSON.stringify({
+		        $.post('http://esx_banking/transfer', JSON.stringify({
 					to: $("#to").val(),
 		            amountt: $("#amountt").val()
 		        }));
@@ -269,7 +269,7 @@
 			});
 			$("#withdraw1").submit(function(e) {
 				e.preventDefault(); // Prevent form from submitting
-		        $.post('http://new_banking/withdrawl', JSON.stringify({
+		        $.post('http://esx_banking/withdrawl', JSON.stringify({
 		            amountw: $("#amountw").val()
 		        }));
 				$('#withdrawUI').hide();
@@ -280,7 +280,7 @@
 		        if (data.which == 27){
 		            $('#general, #waiting, #transferUI, #withdrawUI, #depositUI, #topbar').hide();
 		            $('body').removeClass("active");
-		            $.post('http://new_banking/NUIFocusOff', JSON.stringify({}));
+		            $.post('http://esx_banking/NUIFocusOff', JSON.stringify({}));
 		        }
 		    }
     	</script>

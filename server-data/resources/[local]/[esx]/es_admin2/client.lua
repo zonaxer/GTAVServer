@@ -19,8 +19,7 @@ Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
 		
-		--if (IsControlJustPressed(1, 212) and IsControlJustPressed(1, 213)) and (group == "admin" or group == "superadmin" or group == "mod") then
-		if (IsControlJustPressed(1, 212) and IsControlJustPressed(1, 213)) then
+		if (IsControlJustPressed(1, 212) and IsControlJustPressed(1, 213)) and (group == "admin" or group == "superadmin" or group == "mod") then
 			TriggerServerEvent('es_admin:getReports')			
 		end
 	end

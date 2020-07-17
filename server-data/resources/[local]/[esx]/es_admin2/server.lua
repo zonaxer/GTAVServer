@@ -137,10 +137,14 @@ end)
 
 RegisterServerEvent('es_admin:set')
 AddEventHandler('es_admin:set', function(t, USER, GROUP)
-	local Source = source
+	local src = source
+	local user = ESX.GetPlayerFromId(src)
+	local group = user.getGroup()
+	
+	if group == "admin" or group == "superadmin" or group == "mod" then
 			if t == "group" then
 				if(GetPlayerName(USER) == nil)then
-					TriggerClientEvent('chat:addMessage', Source, {
+					TriggerClientEvent('chat:addMessage', src, {
 						args = {"^1SYSTEM", "Jugador no encontrado"}
 					})
 				else
@@ -154,7 +158,7 @@ AddEventHandler('es_admin:set', function(t, USER, GROUP)
 				end
 			elseif t == "money" then
 				if(GetPlayerName(USER) == nil)then
-					TriggerClientEvent('chat:addMessage', Source, {
+					TriggerClientEvent('chat:addMessage', src, {
 						args = {"^1SYSTEM", "Jugador no encontrado"}
 					})
 				else
@@ -163,14 +167,14 @@ AddEventHandler('es_admin:set', function(t, USER, GROUP)
 						local user = ESX.GetPlayerFromId(USER)
 						user.addMoney(GROUP)
 					else
-						TriggerClientEvent('chat:addMessage', Source, {
+						TriggerClientEvent('chat:addMessage', src, {
 							args = {"^1SYSTEM", "Valor no adminitido."}
 						})
 					end
 				end
 			elseif t == "bank" then
 				if(GetPlayerName(USER) == nil)then
-					TriggerClientEvent('chat:addMessage', Source, {
+					TriggerClientEvent('chat:addMessage', src, {
 						args = {"^1SYSTEM", "Jugador no encontrado"}
 					})
 				else
@@ -179,7 +183,7 @@ AddEventHandler('es_admin:set', function(t, USER, GROUP)
 						local user = ESX.GetPlayerFromId(USER)
 						user.addAccountMoney('bank', GROUP)
 					else
-						TriggerClientEvent('chat:addMessage', Source, {
+						TriggerClientEvent('chat:addMessage', src, {
 							args = {"^1SYSTEM", "Invalid integer entered"}
 						})
 					end
@@ -187,7 +191,7 @@ AddEventHandler('es_admin:set', function(t, USER, GROUP)
 			elseif t == "black_money" then
 				print('DINERO NEGRO')
 				if(GetPlayerName(USER) == nil)then
-					TriggerClientEvent('chat:addMessage', Source, {
+					TriggerClientEvent('chat:addMessage', src, {
 						args = {"^1SYSTEM", "Jugador no encontrado"}
 					})
 				else
@@ -196,12 +200,13 @@ AddEventHandler('es_admin:set', function(t, USER, GROUP)
 						local user = ESX.GetPlayerFromId(USER)
 						user.addAccountMoney('black_money', GROUP)
 					else
-						TriggerClientEvent('chat:addMessage', Source, {
+						TriggerClientEvent('chat:addMessage', src, {
 							args = {"^1SYSTEM", "Invalid integer entered"}
 						})
 					end
 				end
 		end
+	end
 end)
 
 

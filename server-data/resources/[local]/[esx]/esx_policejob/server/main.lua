@@ -146,13 +146,15 @@ AddEventHandler('esx_policejob:putStockItems', function(itemName, count)
 end)
 
 ESX.RegisterServerCallback('esx_policejob:getOtherPlayerData', function(source, cb, target, notify)
+	
 	local xPlayer = ESX.GetPlayerFromId(target)
-
+	
 	if notify then
 		xPlayer.showNotification(_U('being_searched'))
 	end
 
 	if xPlayer then
+		
 		local data = {
 			name = xPlayer.getName(),
 			job = xPlayer.job.label,
@@ -168,8 +170,9 @@ ESX.RegisterServerCallback('esx_policejob:getOtherPlayerData', function(source, 
 
 			if xPlayer.get('sex') == 'm' then data.sex = 'male' else data.sex = 'female' end
 		end
-
+		
 		TriggerEvent('esx_status:getStatus', target, 'drunk', function(status)
+			
 			if status then
 				data.drunk = ESX.Math.Round(status.percent)
 			end

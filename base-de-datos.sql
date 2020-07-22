@@ -4,7 +4,6 @@ USE `es_extended`;
 --
 -- Host: localhost    Database: es_extended
 -- ------------------------------------------------------
-
 -- Server version	5.7.30-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -58,7 +57,7 @@ CREATE TABLE `addon_account_data` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_addon_account_data_account_name_owner` (`account_name`,`owner`),
   KEY `index_addon_account_data_account_name` (`account_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,9 +66,7 @@ CREATE TABLE `addon_account_data` (
 
 LOCK TABLES `addon_account_data` WRITE;
 /*!40000 ALTER TABLE `addon_account_data` DISABLE KEYS */;
-
 INSERT INTO `addon_account_data` VALUES (1,'society_ambulance',0,NULL),(2,'society_cardealer',0,NULL),(3,'society_police',0,NULL);
-
 /*!40000 ALTER TABLE `addon_account_data` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -219,7 +216,7 @@ CREATE TABLE `datastore_data` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_datastore_data_name_owner` (`name`,`owner`),
   KEY `index_datastore_data_name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -281,7 +278,7 @@ CREATE TABLE `items` (
 
 LOCK TABLES `items` WRITE;
 /*!40000 ALTER TABLE `items` DISABLE KEYS */;
-INSERT INTO `items` VALUES ('bandage','Benda',2,0,1),('bread','Pan',1,0,1),('medikit','Botiquin',2,0,1),('water','Agua',1,0,1);
+INSERT INTO `items` VALUES ('bandage','Benda',2,0,1),('beer','Cerveza',1,0,1),('bread','Pan',1,0,1),('medikit','Botiquin',2,0,1),('water','Agua',1,0,1);
 /*!40000 ALTER TABLE `items` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -337,7 +334,6 @@ LOCK TABLES `jobs` WRITE;
 /*!40000 ALTER TABLE `jobs` DISABLE KEYS */;
 INSERT INTO `jobs` VALUES ('ambulance','EMS'),('cardealer','Concessionnaire'),('police','LSPD'),('unemployed','Unemployed');
 /*!40000 ALTER TABLE `jobs` ENABLE KEYS */;
-
 UNLOCK TABLES;
 
 --
@@ -362,7 +358,6 @@ LOCK TABLES `licenses` WRITE;
 /*!40000 ALTER TABLE `licenses` DISABLE KEYS */;
 INSERT INTO `licenses` VALUES ('dmv','Examen'),('drive','Permiso de conducir'),('drive_bike','Permiso de moto'),('drive_truck','Permiso de camión');
 /*!40000 ALTER TABLE `licenses` ENABLE KEYS */;
-
 UNLOCK TABLES;
 
 --
@@ -379,7 +374,7 @@ CREATE TABLE `owned_properties` (
   `rented` int(11) NOT NULL,
   `owner` varchar(60) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -414,8 +409,7 @@ CREATE TABLE `owned_vehicles` (
   PRIMARY KEY (`plate`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `vehsowned` (`owner`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -608,7 +602,7 @@ CREATE TABLE `shops` (
   `item` varchar(100) NOT NULL,
   `price` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -617,7 +611,7 @@ CREATE TABLE `shops` (
 
 LOCK TABLES `shops` WRITE;
 /*!40000 ALTER TABLE `shops` DISABLE KEYS */;
-INSERT INTO `shops` VALUES (1,'TwentyFourSeven','bread',30),(2,'TwentyFourSeven','water',15),(3,'RobsLiquor','bread',30),(4,'RobsLiquor','water',15),(5,'LTDgasoline','bread',30),(6,'LTDgasoline','water',15);
+INSERT INTO `shops` VALUES (1,'TwentyFourSeven','bread',30),(2,'TwentyFourSeven','water',15),(3,'RobsLiquor','bread',30),(4,'RobsLiquor','water',15),(5,'LTDgasoline','bread',30),(6,'LTDgasoline','water',15),(7,'TwentyFourSeven','beer',45),(8,'RobsLiquor','beer',45),(9,'LTDgasoline','beer',45);
 /*!40000 ALTER TABLE `shops` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -877,5 +871,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-07 23:59:34
-
+-- Dump completed on 2020-07-23  0:33:29

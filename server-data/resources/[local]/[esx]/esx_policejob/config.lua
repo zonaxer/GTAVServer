@@ -5,10 +5,10 @@ Config.MarkerType                 = 1
 Config.MarkerSize                 = {x = 1.5, y = 1.5, z = 0.5}
 Config.MarkerColor                = {r = 50, g = 50, b = 204}
 
-Config.EnablePlayerManagement     = false
-Config.EnableArmoryManagement     = false
-Config.EnableESXIdentity          = false -- enable if you're using esx_identity
-Config.EnableLicenses             = false -- enable if you're using esx_license
+Config.EnablePlayerManagement     = true
+Config.EnableArmoryManagement     = true
+Config.EnableESXIdentity          = true -- enable if you're using esx_identity
+Config.EnableLicenses             = true -- enable if you're using esx_license
 
 Config.EnableHandcuffTimer        = true -- enable handcuff timer? will unrestrain player after the time ends
 Config.HandcuffTimer              = 10 * 60000 -- 10 mins
@@ -19,7 +19,7 @@ Config.EnableCustomPeds           = false -- enable custom peds in cloak room? S
 Config.EnableESXService           = false -- enable esx service?
 Config.MaxInService               = 5
 
-Config.Locale                     = 'fr'
+Config.Locale                     = 'es'
 
 Config.PoliceStations = {
 

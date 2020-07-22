@@ -52,7 +52,6 @@ end)
 AddEventHandler('esx_status:getStatus', function(playerId, statusName, cb)
 	local xPlayer = ESX.GetPlayerFromId(playerId)
 	local status  = xPlayer.get('status')
-
 	for i=1, #status, 1 do
 		if status[i].name == statusName then
 			cb(status[i])

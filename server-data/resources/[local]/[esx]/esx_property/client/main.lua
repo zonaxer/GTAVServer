@@ -1,6 +1,7 @@
 local OwnedProperties, Blips, CurrentActionData = {}, {}, {}
 local CurrentProperty, CurrentPropertyOwner, LastProperty, LastPart, CurrentAction, CurrentActionMsg
 local firstSpawn, hasChest, hasAlreadyEnteredMarker = true, false, false
+local isHost = false
 ESX = nil
 
 Citizen.CreateThread(function()
@@ -406,10 +407,11 @@ function OpenRoomMenu(property, owner)
 	if CurrentPropertyOwner == owner then
 		table.insert(elements, {label = _U('player_clothes'), value = 'player_dressing'})
 		table.insert(elements, {label = _U('remove_cloth'), value = 'remove_cloth'})
+		table.insert(elements, {label = _U('remove_object'),  value = 'room_inventory'})
+		table.insert(elements, {label = _U('deposit_object'), value = 'player_inventory'})
 	end
 
-	table.insert(elements, {label = _U('remove_object'),  value = 'room_inventory'})
-	table.insert(elements, {label = _U('deposit_object'), value = 'player_inventory'})
+	
 
 	ESX.UI.Menu.CloseAll()
 
@@ -424,78 +426,93 @@ function OpenRoomMenu(property, owner)
 			local playersInArea = ESX.Game.GetPlayersInArea(entering, 10.0)
 			local elements      = {}
 
-			for i=1, #playersInArea, 1 do
-				if playersInArea[i] ~= PlayerId() then
-					table.insert(elements, {label = GetPlayerName(playersInArea[i]), value = playersInArea[i]})
+			if #playersInArea == 0 then 
+				-- lanzo notificacion
+				ESX.ShowNotification('No hay nadie en la puerta de tu casa.')
+			else
+				for i=1, #playersInArea, 1 do
+					if playersInArea[i] ~= PlayerId() then
+						table.insert(elements, {label = GetPlayerName(playersInArea[i]), value = playersInArea[i]})
+					end
 				end
+				
+				ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'room_invite', {
+					title    = property.label .. ' - ' .. _U('invite'),
+					align    = 'top-left',
+					elements = elements,
+				}, function(data2, menu2)
+					TriggerEvent('instance:invite', 'property', GetPlayerServerId(data2.current.value), {property = property.name, owner = owner})
+					ESX.ShowNotification(_U('you_invited', GetPlayerName(data2.current.value)))
+				end, function(data2, menu2)
+					menu2.close()
+				end)
 			end
-
-			ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'room_invite', {
-				title    = property.label .. ' - ' .. _U('invite'),
-				align    = 'top-left',
-				elements = elements,
-			}, function(data2, menu2)
-				TriggerEvent('instance:invite', 'property', GetPlayerServerId(data2.current.value), {property = property.name, owner = owner})
-				ESX.ShowNotification(_U('you_invited', GetPlayerName(data2.current.value)))
-			end, function(data2, menu2)
-				menu2.close()
-			end)
 
 		elseif data.current.value == 'player_dressing' then
 
 			ESX.TriggerServerCallback('esx_property:getPlayerDressing', function(dressing)
 				local elements = {}
+				if #dressing == 0 then 
+					-- lanzo notificacion
+					ESX.ShowNotification('No tienes ninguna ropa.')
+				else 
+					for i=1, #dressing, 1 do
+						table.insert(elements, {
+							label = dressing[i],
+							value = i
+						})
+					end
 
-				for i=1, #dressing, 1 do
-					table.insert(elements, {
-						label = dressing[i],
-						value = i
-					})
-				end
+					ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'player_dressing', {
+						title    = property.label .. ' - ' .. _U('player_clothes'),
+						align    = 'top-left',
+						elements = elements
+					}, function(data2, menu2)
+						TriggerEvent('skinchanger:getSkin', function(skin)
+							ESX.TriggerServerCallback('esx_property:getPlayerOutfit', function(clothes)
+								TriggerEvent('skinchanger:loadClothes', skin, clothes)
+								TriggerEvent('esx_skin:setLastSkin', skin)
 
-				ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'player_dressing', {
-					title    = property.label .. ' - ' .. _U('player_clothes'),
-					align    = 'top-left',
-					elements = elements
-				}, function(data2, menu2)
-					TriggerEvent('skinchanger:getSkin', function(skin)
-						ESX.TriggerServerCallback('esx_property:getPlayerOutfit', function(clothes)
-							TriggerEvent('skinchanger:loadClothes', skin, clothes)
-							TriggerEvent('esx_skin:setLastSkin', skin)
-
-							TriggerEvent('skinchanger:getSkin', function(skin)
-								TriggerServerEvent('esx_skin:save', skin)
-							end)
-						end, data2.current.value)
+								TriggerEvent('skinchanger:getSkin', function(skin)
+									TriggerServerEvent('esx_skin:save', skin)
+								end)
+							end, data2.current.value)
+						end)
+					end, function(data2, menu2)
+						menu2.close()
 					end)
-				end, function(data2, menu2)
-					menu2.close()
-				end)
+				end
 			end)
+			
 
 		elseif data.current.value == 'remove_cloth' then
 
 			ESX.TriggerServerCallback('esx_property:getPlayerDressing', function(dressing)
 				local elements = {}
+				if #dressing == 0 then 
+					-- lanzo notificacion
+					ESX.ShowNotification('No tienes ninguna ropa.')
+				else 
 
-				for i=1, #dressing, 1 do
-					table.insert(elements, {
-						label = dressing[i],
-						value = i
-					})
+					for i=1, #dressing, 1 do
+						table.insert(elements, {
+							label = dressing[i],
+							value = i
+						})
+					end
+
+					ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'remove_cloth', {
+						title    = property.label .. ' - ' .. _U('remove_cloth'),
+						align    = 'top-left',
+						elements = elements
+					}, function(data2, menu2)
+						menu2.close()
+						TriggerServerEvent('esx_property:removeOutfit', data2.current.value)
+						ESX.ShowNotification(_U('removed_cloth'))
+					end, function(data2, menu2)
+						menu2.close()
+					end)
 				end
-
-				ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'remove_cloth', {
-					title    = property.label .. ' - ' .. _U('remove_cloth'),
-					align    = 'top-left',
-					elements = elements
-				}, function(data2, menu2)
-					menu2.close()
-					TriggerServerEvent('esx_property:removeOutfit', data2.current.value)
-					ESX.ShowNotification(_U('removed_cloth'))
-				end, function(data2, menu2)
-					menu2.close()
-				end)
 			end)
 
 		elseif data.current.value == 'room_inventory' then
@@ -727,8 +744,8 @@ RegisterNetEvent('instance:onEnter')
 AddEventHandler('instance:onEnter', function(instance)
 	if instance.type == 'property' then
 		local property = GetProperty(instance.data.property)
-		local isHost   = GetPlayerFromServerId(instance.host) == PlayerId()
 		local isOwned  = false
+		isHost   = GetPlayerFromServerId(instance.host) == PlayerId()
 
 		if PropertyIsOwned(property) == true then
 			isOwned = true
@@ -877,7 +894,11 @@ Citizen.CreateThread(function()
 						OpenGatewayMenu(CurrentActionData.property)
 					end
 				elseif CurrentAction == 'room_menu' then
-					OpenRoomMenu(CurrentActionData.property, CurrentActionData.owner)
+					if isHost then
+						OpenRoomMenu(CurrentActionData.property, CurrentActionData.owner)
+					else
+						ESX.ShowNotification('No eres el propietario de la casa.')
+					end
 				elseif CurrentAction == 'room_exit' then
 					TriggerEvent('instance:leave')
 				end

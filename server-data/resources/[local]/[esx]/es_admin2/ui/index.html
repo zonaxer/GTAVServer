@@ -30,9 +30,11 @@
 						$('#list').append('<div class="player" id="player_' + player.id + '">' + player.name + '</div>');
 					}
 					let reports = JSON.parse(event.data.reports);
+					$('#reports').find('tbody').empty();
 					
 					for ( id in reports) {
 						//console.log(reports[id].message);
+						
 						$('#reports').find('tbody').append(`<tr><td>${reports[id].fecha}</td><td>${reports[id].playerName}</td><td>${reports[id].message}</td></tr>`);
 					}
 

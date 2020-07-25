@@ -36,6 +36,7 @@ end, true)
 
 RegisterServerEvent('es_admin:getReports')
 AddEventHandler('es_admin:getReports', function(cb)
+	loadReports()
 	TriggerClientEvent('es_admin:openUI', source, reports)
 end)
 
@@ -85,20 +86,20 @@ end)
 
 RegisterServerEvent('es_admin:all')
 AddEventHandler('es_admin:all', function(type)
-	local Source = source
-	TriggerEvent('es:getPlayerFromId', source, function(user)
-		TriggerEvent('es:canGroupTarget', user.getGroup(), "admin", function(available)
-			if available or user.getGroup() == "superadmin" then
-				if type == "slay_all" then TriggerClientEvent('es_admin:quick', -1, 'slay') end
-				if type == "bring_all" then TriggerClientEvent('es_admin:quick', -1, 'bring', Source) end
-				if type == "slap_all" then TriggerClientEvent('es_admin:quick', -1, 'slap') end
-			else
-				TriggerClientEvent('chat:addMessage', Source, {
-					args = {"^1SYSTEM", "You do not have permission to do this"}
-				})
-			end
-		end)
-	end)
+	local _source = source
+	local user = ESX.GetPlayerFromId(_source)
+
+	if user.getGroup() == 'admin' then
+		if type == "slay_all" then TriggerClientEvent('es_admin:quick', -1, 'slay') end
+		if type == "bring_all" then TriggerClientEvent('es_admin:quick', -1, 'bring', _source) end
+		if type == "slap_all" then TriggerClientEvent('es_admin:quick', -1, 'slap') end
+	else
+		TriggerClientEvent('chat:addMessage', Source, {
+			args = {"^1SYSTEM", "You do not have permission to do this"}
+		})
+	end
+	
+	
 end)
 
 RegisterServerEvent('es_admin:quick')

@@ -1,6 +1,6 @@
 fx_version 'bodacious'
-game 'gta5'
 
+game 'gta5'
 
 ui_page 'html/index.html'
 
@@ -54,6 +54,10 @@ files {
 	'html/static/img/icons_app/9gag.png',
 	'html/static/img/icons_app/twitter.png',
 	'html/static/img/icons_app/borrado.png',
+	'html/static/img/icons_app/mechanic.png',
+	'html/static/img/icons_app/taxi.png',
+	'html/static/img/icons_app/police.png',
+	'html/static/img/icons_app/ambulance.png',
 	
 	'html/static/img/app_bank/fleeca_tar.png',
 	'html/static/img/app_bank/tarjetas.png',
@@ -70,24 +74,17 @@ files {
 	'html/static/fonts/fontawesome-webfont.woff',
 	'html/static/fonts/fontawesome-webfont.woff2',
 
-	'html/static/sound/ring.ogg',
-	'html/static/sound/ring2.ogg',
-	'html/static/sound/bella_ciao.ogg',
-	'html/static/sound/casa_papel.ogg',
-	'html/static/sound/iphone11.ogg',
-	'html/static/sound/safaera.ogg',
-	'html/static/sound/tusa.ogg',
-	'html/static/sound/xtentacion.ogg',
-	'html/static/sound/tchatNotification.ogg',
-	'html/static/sound/Phone_Call_Sound_Effect.ogg',
+	'html/static/sound/*.ogg',
 
 }
 
 client_script {
+	"@es_extended/locale.lua",
+	"locales/en.lua",
+	"locales/es.lua",
 	"config.lua",
 	"client/animation.lua",
 	"client/client.lua",
-
 	"client/photo.lua",
 	"client/app_tchat.lua",
 	"client/bank.lua",
@@ -95,10 +92,12 @@ client_script {
 }
 
 server_script {
-	'@mysql-async/lib/MySQL.lua',
+	"@mysql-async/lib/MySQL.lua",
+	"@es_extended/locale.lua",
+	"locales/en.lua",
+	"locales/es.lua",
 	"config.lua",
 	"server/server.lua",
-
 	"server/app_tchat.lua",
-	"server/twitter.lua"
+	"server/twitter.lua",
 }

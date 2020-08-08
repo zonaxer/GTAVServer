@@ -25,6 +25,9 @@
 
   "useFormatNumberFrance": true,
 
+  "/Sentry/": "Enabling this option can help us to discover new bugs and solve them ASAP! (We beg you to keep this enabled, so we can help us each other as a community)",
+  "useSentryErroTracking": true,
+
   "useWebRTCVocal": false,
   "RTCConfig": {
     "iceServers": [{
@@ -92,47 +95,78 @@
 
 
   "serviceCall": [{
-      "display": "Police",
-      "icon": "/html/static/img/icons_app/policia.png",
-      "subMenu": [{
-          "title": "Send a message",
-          "eventName": "esx_addons_gcphone:call",
-          "type": {
-            "number": "police"
-          }
-        },
-        {
-          "title": "Call emergency number",
-          "eventName": "gcphone:autoCallNumber",
-          "type": {
-            "number": "911"
-          }
-        }
-      ]
-    },
-    {
-      "display": "Ambulance",
-      "backgroundColor": "red",
-      "icon": "/html/static/img/icons_app/lsfd.png",
-      "subMenu": [{
-        "title": "Send a message",
+    "display": "Policia",
+    "icon": "/html/static/img/icons_app/police.png",
+    "subMenu": [{
+        "title": "Enviar un mensaje",
         "eventName": "esx_addons_gcphone:call",
         "type": {
-          "number": "ambulance"
+          "number": "police"
         }
-      }]
-    },
-    {
-      "display": "Taxi",
-      "backgroundColor": "yellow",
-      "subMenu": [{
-        "title": "Send a message",
-        "eventName": "esx_addons_gcphone:call",
+      },
+      {
+        "title": "Llamar a comisaria",
+        "eventName": "gcphone:autoCallNumber",
         "type": {
-          "number": "taxi"
+          "number": "call_police"
+        }
+      }
+    ]
+  },
+  {
+    "display": "Ambulancia",
+    "icon": "/html/static/img/icons_app/ambulance.png",
+    "subMenu": [{
+      "title": "Enviar un mensaje",
+      "eventName": "esx_addons_gcphone:call",
+      "type": {
+        "number": "ambulance"
+      }
+    },
+      {
+        "title": "Llamar al Hospital",
+        "eventName": "gcphone:autoCallNumber",
+        "type": {
+          "number": "call_ambulance"
         }
       }]
-    }
+  },
+{
+    "display": "Mecánico",
+    "icon": "/html/static/img/icons_app/mechanic.png",
+    "subMenu": [{
+      "title": "Enviar un mensaje",
+      "eventName": "esx_addons_gcphone:call",
+      "type": {
+        "number": "mechanic"
+      }
+    },
+      {
+        "title": "Llamar al Taller",
+        "eventName": "gcphone:autoCallNumber",
+        "type": {
+          "number": "call_mechanic"
+        }
+      }]
+  },
+{
+    "display": "Taxi",
+    "icon": "/html/static/img/icons_app/taxi.png",
+    "subMenu": [{
+      "title": "Enviar un mensaje",
+      "eventName": "esx_addons_gcphone:call",
+      "type": {
+        "number": "taxi"
+      }
+    },
+      {
+        "title": "Llamar a la Central de Taxis",
+        "eventName": "gcphone:autoCallNumber",
+        "type": {
+          "number": "call_taxi"
+        }
+      }]
+  }
   ],
 
   "defaultContacts": [{
@@ -177,8 +211,8 @@
       "routeName": "appels",
       "inHomePage": true
     },
-   
-    
+
+
     {
       "name": "Contacts",
       "fr_FR__name": "Contacts",
@@ -216,7 +250,7 @@
       "routeName": "parametre",
       "inHomePage": false
     },
-    
+
     {
       "name": "Bank",
       "fr_FR__name": "Wallet",
@@ -270,7 +304,7 @@
       "es_ES__name": "Notas ",
       "routeName": "notes",
       "icons": "/html/static/img/icons_app/notes.png"
-      
+
     },
     {
       "name": "9GAG",
@@ -286,7 +320,6 @@
       "PHONE_WARNING_MESSAGE_MESS": "messages",
       "CONFIRM": "Accepter",
       "CANCEL": "Annuler",
-      "APP_MESSAGE_MESS_NUMBER": "Le numéro",
       "APP_CONFIG_TITLE": "Paramètres",
       "APP_CONFIG_MY_MUNBER": "Mon numéro",
       "APP_CONFIG_WALLPAPER": "Fond d'écran",
@@ -330,6 +363,7 @@
       "APP_MESSAGE_ZOOM_IMG": "Zoom",
       "APP_MESSAGE_DELETE": "Effacer",
       "APP_MESSAGE_MESS_NUMBER": "Numero ",
+      "APP_MESSAGE_SAVE_CONTACT": "Enregistrer le contact",
       "APP_MESSAGE_MESS_SMS": "SMS",
       "APP_MESSAGE_MESS_CALL": "Appeler",
       "APP_MESSAGE_MESS_COPY": "Copier",
@@ -407,8 +441,8 @@
       "PHONE_WARNING_MESSAGE_MESS": "Messages",
       "CONFIRM": "Accept",
       "CANCEL": "Abort",
-      "APP_MESSAGE_MESS_NUMBER": "Number",
       "APP_CONFIG_TITLE": "Settings",
+      "APP_MESSAGE_SAVE_CONTACT": "Save contact",
       "APP_CONFIG_MY_MUNBER": "My number",
       "APP_CONFIG_WALLPAPER": "Wallpaper",
       "APP_CONFIG_CASE": "Telephone cover",
@@ -423,6 +457,8 @@
       "APP_PHONE_CALL": "call",
       "APP_PHONE_DELETE": "Delete",
       "APP_PHONE_DELETE_ALL": "Delete all.",
+      "APP_PHONE_CANCEL": "Cancel",
+      "APP_PHONE_ADD": "Add contact",
       "APP_PHONE_TITLE": "Telephone number",
       "APP_PHONE_MENU_FAVORITES": "favourites",
       "APP_PHONE_MENU_RECENTS": "Newest",
@@ -450,6 +486,10 @@
       "APP_MESSAGE_CONTACT_TITLE": "contacts",
       "APP_MESSAGE_CONTRACT_ENTER_NUMBER": "Enter a number",
       "APP_MESSAGE_PLACEHOLDER_ENTER_MESSAGE": "Send a message",
+      "APP_MESSAGE_MESS_SMS": "SMS",
+      "APP_MESSAGE_MESS_CALL": "Call",
+      "APP_MESSAGE_MESS_COPY": "Copy",
+      "APP_MESSAGE_SEND_PHOTO": "Send a photo",
       "APP_DARKTCHAT_TITLE": "Reddit",
       "APP_DARKTCHAT_NEW_CHANNEL": "Add a channel",
       "APP_DARKTCHAT_DELETE_CHANNEL": "Delete the channel",
@@ -518,6 +558,7 @@
       "PHONE_WARNING_MESSAGE": "Achtung!",
       "PHONE_WARNING_MESSAGE_MESS": "Nachrichten",
       "CONFIRM": "Akzeptieren",
+      "APP_MESSAGE_SAVE_CONTACT": "Kontakt speichern",
       "CANCEL": "Abbrechen",
       "APP_CONFIG_TITLE": "Einstellungen",
       "APP_CONFIG_MY_MUNBER": "Meine Nummer",
@@ -636,9 +677,9 @@
       "PHONE_WARNING_MESSAGE_MESS": "nowiny",
       "CONFIRM": "Akceptacja",
       "CANCEL": "przerwać",
-      "APP_MESSAGE_MESS_NUMBER": "Liczba",
       "APP_CONFIG_TITLE": "parametr",
       "APP_CONFIG_MY_MUNBER": "Mój numer",
+      "APP_MESSAGE_SAVE_CONTACT": "Zapisz kontakt",
       "APP_CONFIG_WALLPAPER": "tapeta",
       "APP_CONFIG_MOUSE_SUPPORT": "Controle souris",
       "APP_CONFIG_CASE": "Pokrywa telefoniczna",
@@ -748,6 +789,7 @@
       "PHONE_WARNING_MESSAGE_MESS": "noticias",
       "CONFIRM": "Aceptar",
       "CANCEL": "Cancelar",
+      "APP_MESSAGE_SAVE_CONTACT": "Guardar contacto",
       "APP_CONFIG_TITLE": "Ajustes",
       "APP_CONFIG_MY_MUNBER": "Mi número",
       "APP_CONFIG_WALLPAPER": "Fondo pantalla",
@@ -763,6 +805,8 @@
       "APP_PHONE_CALL_ANONYMOUS": "Llamada Anonima",
       "APP_PHONE_DELETE": "Borrar",
       "APP_PHONE_DELETE_ALL": "Borrar todo.",
+      "APP_PHONE_CANCEL": "Cancelar",
+      "APP_PHONE_ADD": "Añadir contacto",
       "APP_PHONE_TITLE": "Contactos",
       "APP_PHONE_MENU_FAVORITES": "preferidos",
       "APP_PHONE_MENU_RECENTS": "Recientes",
@@ -846,6 +890,9 @@
       "APP_BANK_TITLE_ENTER_MONEY": "Número de cuenta",
       "APP_BANK_BUTTON_TRANSFER": "Transferencia",
       "APP_BANK_BUTTON_CANCEL": "Cancelar",
+      "APP_MESSAGE_MESS_SMS": "SMS",
+      "APP_MESSAGE_MESS_CALL": "Llamar",
+      "APP_MESSAGE_MESS_COPY": "Copiar",
 
       "TIMEAGO": [
         "ahora",
@@ -863,8 +910,8 @@
       "PHONE_WARNING_MESSAGE": "připomínka",
       "PHONE_WARNING_MESSAGE_MESS": "zprávy",
       "CONFIRM": "Přijmout",
+      "APP_MESSAGE_SAVE_CONTACT": "Ruani kontaktin",
       "CANCEL": "Zrušit",
-       "APP_MESSAGE_MESS_NUMBER": "Číslo",
       "APP_CONFIG_TITLE": "nastavení",
       "APP_CONFIG_MY_MUNBER": "Mé číslo",
       "APP_CONFIG_WALLPAPER": "tapeta",

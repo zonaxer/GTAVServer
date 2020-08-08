@@ -16,7 +16,7 @@ Config.AircraftPoundPrice = 7500 -- Aircraft Pound Price.
 
 Config.UseCarGarages        = true -- Allows use of Car Garages.
 Config.UseBoatGarages       = true -- Allows use of Boat Garages.
-Config.UseAircraftGarages   = false -- Allows use of Aircraft Garages.
+Config.UseAircraftGarages   = true -- Allows use of Aircraft Garages.
 Config.UsePrivateCarGarages = true -- Allows use of Private Car Garages.
 Config.UseJobCarGarages     = true -- Allows use of Job Garages.
 

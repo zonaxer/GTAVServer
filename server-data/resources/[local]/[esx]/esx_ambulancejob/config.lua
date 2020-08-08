@@ -13,7 +13,7 @@ Config.Locale                     = 'fr'
 Config.EarlyRespawnTimer          = 60000 * 1  -- time til respawn is available
 Config.BleedoutTimer              = 60000 * 10 -- time til the player bleeds out
 
-Config.EnablePlayerManagement     = false
+Config.EnablePlayerManagement     = true
 
 Config.RemoveWeaponsAfterRPDeath  = true
 Config.RemoveCashAfterRPDeath     = true

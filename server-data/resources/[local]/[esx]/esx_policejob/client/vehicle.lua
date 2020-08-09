@@ -58,6 +58,7 @@ function OpenVehicleSpawnerMenu(type, station, part, partNum)
 						if IsModelInCdimage(props.model) then
 							local vehicleName = GetLabelText(GetDisplayNameFromVehicleModel(props.model))
 							local label = ('%s - <span style="color:darkgoldenrod;">%s</span>: '):format(vehicleName, props.plate)
+							v.stored = true
 
 							if v.stored then
 								label = label .. ('<span style="color:green;">%s</span>'):format(_U('garage_stored'))

@@ -132,10 +132,15 @@ function StartShopRestriction()
 end
 
 function OpenShopMenu()
+	print('LANZO EVENTO')
+	
+
 	if #Vehicles == 0 then
 		print('[esx_vehicleshop] [^3ERROR^7] No vehicles found')
 		return
 	end
+
+
 
 	IsInShopMenu = true
 
@@ -212,6 +217,33 @@ function OpenShopMenu()
 				{label = _U('yes'), value = 'yes'}
 		}}, function(data2, menu2)
 			if data2.current.value == 'yes' then
+
+				print('DATAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
+				print(vehicleData)
+				print(ESX.DumpTable(vehicleData))
+
+				if(vehicleData.category == 'vip') then
+					ESX.TriggerServerCallback('sg_vip:comprar', function ( comprado ) 
+						if comprado then
+							local generatedPlate = GeneratePlate()
+							IsInShopMenu = false
+							menu2.close()
+							menu.close()
+							DeleteDisplayVehicleInsideShop()
+
+							ESX.Game.SpawnVehicle(vehicleData.model, Config.Zones.ShopOutside.Pos, Config.Zones.ShopOutside.Heading, function(vehicle)
+								TaskWarpPedIntoVehicle(playerPed, vehicle, -1)
+								SetVehicleNumberPlateText(vehicle, generatedPlate)
+
+								FreezeEntityPosition(playerPed, false)
+								SetEntityVisible(playerPed, true)
+							end)
+
+						else
+							ESX.ShowNotification('No tienes Coronas.')
+						end
+					end, vehicleData.price)
+				else
 				if not wait then
 					wait = true
 					if Config.EnablePlayerManagement then
@@ -227,6 +259,7 @@ function OpenShopMenu()
 								local playerPed = PlayerPedId()
 								FreezeEntityPosition(playerPed, false)
 								SetEntityVisible(playerPed, true)
+
 								SetEntityCoords(playerPed, Config.Zones.ShopEntering.Pos)
 
 								menu2.close()

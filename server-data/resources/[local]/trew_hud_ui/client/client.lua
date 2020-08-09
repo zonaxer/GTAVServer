@@ -372,6 +372,8 @@ AddEventHandler('trew_hud_ui:setInfo', function(info)
 	SendNUIMessage({ action = 'setMoney', id = 'wallet', value = info['money'] })
 	SendNUIMessage({ action = 'setMoney', id = 'bank', value = info['bankMoney'] })
 	SendNUIMessage({ action = 'setMoney', id = 'blackMoney', value = info['blackMoney'] })
+	SendNUIMessage({ action = 'setMoney', id = 'coronas', value = info['coronas'] })
+
 
 	TriggerEvent('esx:getSharedObject', function(obj)
 		ESX = obj
@@ -915,6 +917,7 @@ RegisterCommand('toggleui', function()
 		SendNUIMessage({ action = 'element', task = 'disable', value = 'bank' })
 		SendNUIMessage({ action = 'element', task = 'disable', value = 'blackMoney' })
 		SendNUIMessage({ action = 'element', task = 'disable', value = 'wallet' })
+		SendNUIMessage({ action = 'element', task = 'disable', value = 'coronas' })
 	else
 		if (Config.ui.showJob == true) then
 			SendNUIMessage({ action = 'element', task = 'enable', value = 'job' })
@@ -930,6 +933,9 @@ RegisterCommand('toggleui', function()
 		end
 		if (Config.ui.showWalletMoney == true) then
 			SendNUIMessage({ action = 'element', task = 'enable', value = 'wallet' })
+		end
+		if (Config.ui.showCoronas == true) then
+			SendNUIMessage({ action = 'element', task = 'enable', value = 'coronas' })
 		end
 	end
 

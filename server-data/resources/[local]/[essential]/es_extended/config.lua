@@ -4,7 +4,8 @@ Config.Locale = 'en'
 Config.Accounts = {
 	bank = _U('account_bank'),
 	black_money = _U('account_black_money'),
-	money = _U('account_money')
+	money = _U('account_money'),
+	coronas = 'coronas'
 }
 
 Config.StartingAccountMoney = {bank = 50000}

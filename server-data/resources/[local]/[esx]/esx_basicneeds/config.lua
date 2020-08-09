@@ -1,3 +1,3 @@
 Config = {}
 Config.Locale = 'en'
-Config.Visible = true
+Config.Visible = false

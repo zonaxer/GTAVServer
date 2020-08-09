@@ -66,6 +66,7 @@ window.onload = function () {
 				if (config.showServerLogo == true) { document.querySelector('.info.server').style.display = 'block'; }
 				else if (config.showServerLogo == false) { document.querySelector('.info.player').style.top = '55px'; }
 
+				if (config.showCoronas == true) { document.querySelector('#coronas').style.display = 'block'; }
 				if (config.showWalletMoney == true) { document.querySelector('#wallet').style.display = 'block'; }
 				if (config.showBankMoney == true) { document.querySelector('#bank').style.display = 'block'; }
 				if (config.showBlackMoney == true) { document.querySelector('#blackMoney').style.display = 'block'; }

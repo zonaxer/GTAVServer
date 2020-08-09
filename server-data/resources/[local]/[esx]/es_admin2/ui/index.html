@@ -101,9 +101,20 @@
 			$("#ban").click(function () { $.post('http://es_admin2/quick', JSON.stringify({ id: selected, type: 'ban' })); $(this).blur(); });
 			$("#setgroup").click(function () { $.post('http://es_admin2/set', JSON.stringify({ user: selected, type: 'group', param: $("#newgroup").val() })); $(this).blur(); });
 			$("#setlevel").click(function () { $.post('http://es_admin2/set', JSON.stringify({ user: selected, type: 'level', param: $("#newlevel").val() })); $(this).blur(); });
-			$("#setmoney").click(function () { $.post('http://es_admin2/set', JSON.stringify({ user: selected, type: 'money', param: $("#newmoney").val() })); $(this).blur(); });
-			$("#setbank").click(function () { $.post('http://es_admin2/set', JSON.stringify({ user: selected, type: 'bank', param: $("#newbank").val() })); $(this).blur(); });
-			$("#setblackmoney").click(function () { $.post('http://es_admin2/set', JSON.stringify({ user: selected, type: 'black_money', param: $("#newblackmoney").val() })); $(this).blur(); });
+
+
+			$("#addmoney").click(function () { $.post('http://es_admin2/set', JSON.stringify({ user: selected, type: 'addmoney', param: $("#newmoney").val() })); $(this).blur(); });
+			$("#removemoney").click(function () { $.post('http://es_admin2/set', JSON.stringify({ user: selected, type: 'removemoney', param: $("#newmoney").val() })); $(this).blur(); });
+
+			$("#addbank").click(function () { $.post('http://es_admin2/set', JSON.stringify({ user: selected, type: 'addbank', param: $("#newbank").val() })); $(this).blur(); });
+			$("#removebank").click(function () { $.post('http://es_admin2/set', JSON.stringify({ user: selected, type: 'removebank', param: $("#newbank").val() })); $(this).blur(); });
+			
+			$("#addblackmoney").click(function () { $.post('http://es_admin2/set', JSON.stringify({ user: selected, type: 'addblack_money', param: $("#newblackmoney").val() })); $(this).blur(); });
+			$("#removeblackmoney").click(function () { $.post('http://es_admin2/set', JSON.stringify({ user: selected, type: 'removeblack_money', param: $("#newblackmoney").val() })); $(this).blur(); });
+			
+			$("#addCoronas").click(function () { $.post('http://es_admin2/set', JSON.stringify({ user: selected, type: 'addcoronas', param: $("#newcoronas").val() })); $(this).blur(); });
+			$("#removeCoronas").click(function () { $.post('http://es_admin2/set', JSON.stringify({ user: selected, type: 'removecoronas', param: $("#newcoronas").val() })); $(this).blur(); });
+
 
 			$('button').click(function () { $(this).blur(); });
 		});
@@ -151,21 +162,33 @@
 								<label>Grupo</label>
 								<input id="newgroup" type="text" placeholder="nuevo grupo"></input>
 								<button id="setgroup">Asignar</button>
+
 							</div>
 							<div class="group_set">
 								<label>Efectivo</label>
 								<input id="newmoney" type="text" placeholder="dinero"></input>
-								<button id="setmoney">Asignar</button>
+								<button id="addmoney">Agregar</button>
+								<button id="removemoney">Quitar</button>
+
 							</div>
 							<div class="group_set">
 								<label>Banco</label>
 								<input id="newbank" type="text" placeholder="banco"></input>
-								<button id="setbank">Asignar</button>
+								<button id="addbank">Agregar</button>
+								<button id="removebank">Quitar</button>
+
 							</div>
 							<div class="group_set">
 								<label>Dinero Negro</label>
 								<input id="newblackmoney" type="text" placeholder="dinero negro"></input>
-								<button id="setblackmoney">Asignar</button>
+									<button id="addblackmoney">Agregar</button>
+									<button id="removeblackmoney">Quitar</button>					
+							</div>
+							<div class="group_set">
+								<label>Coronas</label>
+								<input id="newcoronas" type="text" placeholder="coronas"></input>
+								<button id="addCoronas">Agregar</button>
+								<button id="removeCoronas">Quitar</button>
 							</div>
 						</div>
 					</div>

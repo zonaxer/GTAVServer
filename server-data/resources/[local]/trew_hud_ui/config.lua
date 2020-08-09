@@ -51,6 +51,7 @@ Config.ui = {
 	showBankMoney 		= true,
 	showBlackMoney 		= true,
 	showSocietyMoney	= true,
+	showCoronas = true,
 
 	showDate 			= true,
 	showLocation 		= true,

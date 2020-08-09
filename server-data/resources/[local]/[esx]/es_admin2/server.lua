@@ -157,7 +157,7 @@ AddEventHandler('es_admin:set', function(t, USER, GROUP)
 					})
 
 				end
-			elseif t == "money" then
+			elseif t == "addmoney" then
 				if(GetPlayerName(USER) == nil)then
 					TriggerClientEvent('chat:addMessage', src, {
 						args = {"^1SYSTEM", "Jugador no encontrado"}
@@ -173,7 +173,23 @@ AddEventHandler('es_admin:set', function(t, USER, GROUP)
 						})
 					end
 				end
-			elseif t == "bank" then
+			elseif t == "removemoney" then
+				if(GetPlayerName(USER) == nil)then
+					TriggerClientEvent('chat:addMessage', src, {
+						args = {"^1SYSTEM", "Jugador no encontrado"}
+					})
+				else
+					GROUP = tonumber(GROUP)
+					if(GROUP ~= nil and GROUP > -1)then
+						local user = ESX.GetPlayerFromId(USER)
+						user.removeMoney(GROUP)
+					else
+						TriggerClientEvent('chat:addMessage', src, {
+							args = {"^1SYSTEM", "Valor no adminitido."}
+						})
+					end
+				end
+			elseif t == "addbank" then
 				if(GetPlayerName(USER) == nil)then
 					TriggerClientEvent('chat:addMessage', src, {
 						args = {"^1SYSTEM", "Jugador no encontrado"}
@@ -189,8 +205,24 @@ AddEventHandler('es_admin:set', function(t, USER, GROUP)
 						})
 					end
 				end
-			elseif t == "black_money" then
-				print('DINERO NEGRO')
+			elseif t == "removebank" then
+				if(GetPlayerName(USER) == nil)then
+					TriggerClientEvent('chat:addMessage', src, {
+						args = {"^1SYSTEM", "Jugador no encontrado"}
+					})
+				else
+					GROUP = tonumber(GROUP)
+					if(GROUP ~= nil and GROUP > -1)then
+						local user = ESX.GetPlayerFromId(USER)
+						user.removeAccountMoney('bank', GROUP)
+					else
+						TriggerClientEvent('chat:addMessage', src, {
+							args = {"^1SYSTEM", "Invalid integer entered"}
+						})
+					end
+				end
+			elseif t == "addblack_money" then
+
 				if(GetPlayerName(USER) == nil)then
 					TriggerClientEvent('chat:addMessage', src, {
 						args = {"^1SYSTEM", "Jugador no encontrado"}
@@ -200,6 +232,54 @@ AddEventHandler('es_admin:set', function(t, USER, GROUP)
 					if(GROUP ~= nil and GROUP > -1)then
 						local user = ESX.GetPlayerFromId(USER)
 						user.addAccountMoney('black_money', GROUP)
+					else
+						TriggerClientEvent('chat:addMessage', src, {
+							args = {"^1SYSTEM", "Invalid integer entered"}
+						})
+					end
+				end
+			elseif t == "removeblack_money" then
+				if(GetPlayerName(USER) == nil)then
+					TriggerClientEvent('chat:addMessage', src, {
+						args = {"^1SYSTEM", "Jugador no encontrado"}
+					})
+				else
+					GROUP = tonumber(GROUP)
+					if(GROUP ~= nil and GROUP > -1)then
+						local user = ESX.GetPlayerFromId(USER)
+						user.removeAccountMoney('black_money', GROUP)
+					else
+						TriggerClientEvent('chat:addMessage', src, {
+							args = {"^1SYSTEM", "Invalid integer entered"}
+						})
+					end
+				end
+			elseif t == "addcoronas" then
+				if(GetPlayerName(USER) == nil)then
+					TriggerClientEvent('chat:addMessage', src, {
+						args = {"^1SYSTEM", "Jugador no encontrado"}
+					})
+				else
+					GROUP = tonumber(GROUP)
+					if(GROUP ~= nil and GROUP > -1)then
+						local user = ESX.GetPlayerFromId(USER)
+						user.addAccountMoney('coronas', GROUP)
+					else
+						TriggerClientEvent('chat:addMessage', src, {
+							args = {"^1SYSTEM", "Invalid integer entered"}
+						})
+					end
+				end
+			elseif t == "removecoronas" then
+				if(GetPlayerName(USER) == nil)then
+					TriggerClientEvent('chat:addMessage', src, {
+						args = {"^1SYSTEM", "Jugador no encontrado"}
+					})
+				else
+					GROUP = tonumber(GROUP)
+					if(GROUP ~= nil and GROUP > -1)then
+						local user = ESX.GetPlayerFromId(USER)
+						user.removeAccountMoney('coronas', GROUP)
 					else
 						TriggerClientEvent('chat:addMessage', src, {
 							args = {"^1SYSTEM", "Invalid integer entered"}

@@ -303,6 +303,7 @@ function OpenPoliceActionsMenu()
 			end
 
 			table.insert(elements, {label = _U('search_database'), value = 'search_database'})
+			table.insert(elements, {label = 'Devolver Vehiculo Deposito', value = 'return_vehicle'})
 
 			ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'vehicle_interaction', {
 				title    = _U('vehicle_interaction'),
@@ -315,6 +316,8 @@ function OpenPoliceActionsMenu()
 
 				if action == 'search_database' then
 					LookupVehicle()
+				elseif action == 'return_vehicle'then
+					ReturnVehicle()
 				elseif DoesEntityExist(vehicle) then
 					if action == 'vehicle_infos' then
 						local vehicleData = ESX.Game.GetVehicleProperties(vehicle)
@@ -570,6 +573,30 @@ function LookupVehicle()
 		menu.close()
 	end)
 end
+
+function ReturnVehicle()
+	ESX.UI.Menu.Open('dialog', GetCurrentResourceName(), 'lookup_vehicle',
+	{
+		title = _U('search_database_title'),
+	}, function(data, menu)
+		local length = string.len(data.value)
+		if data.value == nil or length < 2 or length > 13 then
+			ESX.ShowNotification(_U('search_database_error_invalid'))
+		else	
+			ESX.TriggerServerCallback('esx_advancedgarage:setImpoundedState', function(found)
+				if found then
+					ESX.ShowNotification('El vehiculo ha sido devuelvo deposito')
+				else
+					ESX.ShowNotification('El vehiculo no existe')
+				end
+			end, data.value, false)
+			menu.close()
+		end
+	end, function(data, menu)
+		menu.close()
+	end)
+end
+
 
 function ShowPlayerLicense(player)
 	local elements = {}
@@ -1550,11 +1577,16 @@ function StartHandcuffTimer()
 end
 
 -- TODO
---   - return to garage if owned
---   - message owner that his vehicle has been impounded
 function ImpoundVehicle(vehicle)
 	--local vehicleName = GetLabelText(GetDisplayNameFromVehicleModel(GetEntityModel(vehicle)))
-	ESX.Game.DeleteVehicle(vehicle)
-	ESX.ShowNotification(_U('impound_successful'))
+	local vehicleData = ESX.Game.GetVehicleProperties(vehicle)
+	ESX.Game.DeleteVehicle(vehicle) 
+	ESX.TriggerServerCallback('esx_advancedgarage:setImpoundedState', function(found)
+		if found then
+			ESX.ShowNotification(_U('impound_successful'))
+		else
+			ESX.ShowNotification('Ha ocurrido algo...')
+		end
+	end, vehicleData.plate, true)
 	currentTask.busy = false
 end

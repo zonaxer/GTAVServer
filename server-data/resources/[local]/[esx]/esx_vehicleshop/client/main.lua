@@ -1,7 +1,7 @@
 local HasAlreadyEnteredMarker, IsInShopMenu = false, false
 local CurrentAction, CurrentActionMsg, LastZone, currentDisplayVehicle, CurrentVehicleData
 local CurrentActionData, Vehicles, Categories = {}, {}, {}
-
+local wait = false
 ESX = nil
 
 Citizen.CreateThread(function()
@@ -217,6 +217,7 @@ function OpenShopMenu()
 				{label = _U('yes'), value = 'yes'}
 		}}, function(data2, menu2)
 			if data2.current.value == 'yes' then
+
 				print('DATAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
 				print(vehicleData)
 				print(ESX.DumpTable(vehicleData))
@@ -243,6 +244,8 @@ function OpenShopMenu()
 						end
 					end, vehicleData.price)
 				else
+				if not wait then
+					wait = true
 					if Config.EnablePlayerManagement then
 						ESX.TriggerServerCallback('esx_vehicleshop:buyCarDealerVehicle', function(success)
 							if success then
@@ -256,12 +259,15 @@ function OpenShopMenu()
 								local playerPed = PlayerPedId()
 								FreezeEntityPosition(playerPed, false)
 								SetEntityVisible(playerPed, true)
+
 								SetEntityCoords(playerPed, Config.Zones.ShopEntering.Pos)
 
 								menu2.close()
 								menu.close()
 								ESX.ShowNotification(_U('vehicle_purchased'))
+								wait = false
 							else
+								wait = false
 								ESX.ShowNotification(_U('broke_company'))
 							end
 						end, vehicleData.model)
@@ -282,7 +288,9 @@ function OpenShopMenu()
 									FreezeEntityPosition(playerPed, false)
 									SetEntityVisible(playerPed, true)
 								end)
+								wait = false
 							else
+								wait = false
 								ESX.ShowNotification(_U('not_enough_money'))
 							end
 						end, vehicleData.model, generatedPlate)

@@ -381,7 +381,7 @@ end)
 
 --Modify Impound State
 ESX.RegisterServerCallback('esx_advancedgarage:setImpoundedState', function(source, cb, plate, state)
-	MySQL.Async.execute('UPDATE owned_vehicles SET impounded = @state WHERE plate = @plate', {
+	MySQL.Async.execute('UPDATE owned_vehicles SET `impounded` = @state, `last_pound` = 0 WHERE plate = @plate', {
 		['@state'] = state,
 		['@plate'] = plate
 	}, function(rowsChanged)

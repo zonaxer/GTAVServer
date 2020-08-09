@@ -36,6 +36,7 @@ end, true)
 
 RegisterServerEvent('es_admin:getReports')
 AddEventHandler('es_admin:getReports', function(cb)
+	loadReports()
 	TriggerClientEvent('es_admin:openUI', source, reports)
 end)
 
@@ -85,20 +86,20 @@ end)
 
 RegisterServerEvent('es_admin:all')
 AddEventHandler('es_admin:all', function(type)
-	local Source = source
-	TriggerEvent('es:getPlayerFromId', source, function(user)
-		TriggerEvent('es:canGroupTarget', user.getGroup(), "admin", function(available)
-			if available or user.getGroup() == "superadmin" then
-				if type == "slay_all" then TriggerClientEvent('es_admin:quick', -1, 'slay') end
-				if type == "bring_all" then TriggerClientEvent('es_admin:quick', -1, 'bring', Source) end
-				if type == "slap_all" then TriggerClientEvent('es_admin:quick', -1, 'slap') end
-			else
-				TriggerClientEvent('chat:addMessage', Source, {
-					args = {"^1SYSTEM", "You do not have permission to do this"}
-				})
-			end
-		end)
-	end)
+	local _source = source
+	local user = ESX.GetPlayerFromId(_source)
+
+	if user.getGroup() == 'admin' then
+		if type == "slay_all" then TriggerClientEvent('es_admin:quick', -1, 'slay') end
+		if type == "bring_all" then TriggerClientEvent('es_admin:quick', -1, 'bring', _source) end
+		if type == "slap_all" then TriggerClientEvent('es_admin:quick', -1, 'slap') end
+	else
+		TriggerClientEvent('chat:addMessage', Source, {
+			args = {"^1SYSTEM", "You do not have permission to do this"}
+		})
+	end
+	
+	
 end)
 
 RegisterServerEvent('es_admin:quick')
@@ -137,10 +138,14 @@ end)
 
 RegisterServerEvent('es_admin:set')
 AddEventHandler('es_admin:set', function(t, USER, GROUP)
-	local Source = source
+	local src = source
+	local user = ESX.GetPlayerFromId(src)
+	local group = user.getGroup()
+	
+	if group == "admin" or group == "superadmin" or group == "mod" then
 			if t == "group" then
 				if(GetPlayerName(USER) == nil)then
-					TriggerClientEvent('chat:addMessage', Source, {
+					TriggerClientEvent('chat:addMessage', src, {
 						args = {"^1SYSTEM", "Jugador no encontrado"}
 					})
 				else
@@ -154,7 +159,7 @@ AddEventHandler('es_admin:set', function(t, USER, GROUP)
 				end
 			elseif t == "money" then
 				if(GetPlayerName(USER) == nil)then
-					TriggerClientEvent('chat:addMessage', Source, {
+					TriggerClientEvent('chat:addMessage', src, {
 						args = {"^1SYSTEM", "Jugador no encontrado"}
 					})
 				else
@@ -163,14 +168,14 @@ AddEventHandler('es_admin:set', function(t, USER, GROUP)
 						local user = ESX.GetPlayerFromId(USER)
 						user.addMoney(GROUP)
 					else
-						TriggerClientEvent('chat:addMessage', Source, {
+						TriggerClientEvent('chat:addMessage', src, {
 							args = {"^1SYSTEM", "Valor no adminitido."}
 						})
 					end
 				end
 			elseif t == "bank" then
 				if(GetPlayerName(USER) == nil)then
-					TriggerClientEvent('chat:addMessage', Source, {
+					TriggerClientEvent('chat:addMessage', src, {
 						args = {"^1SYSTEM", "Jugador no encontrado"}
 					})
 				else
@@ -179,7 +184,7 @@ AddEventHandler('es_admin:set', function(t, USER, GROUP)
 						local user = ESX.GetPlayerFromId(USER)
 						user.addAccountMoney('bank', GROUP)
 					else
-						TriggerClientEvent('chat:addMessage', Source, {
+						TriggerClientEvent('chat:addMessage', src, {
 							args = {"^1SYSTEM", "Invalid integer entered"}
 						})
 					end
@@ -187,7 +192,7 @@ AddEventHandler('es_admin:set', function(t, USER, GROUP)
 			elseif t == "black_money" then
 				print('DINERO NEGRO')
 				if(GetPlayerName(USER) == nil)then
-					TriggerClientEvent('chat:addMessage', Source, {
+					TriggerClientEvent('chat:addMessage', src, {
 						args = {"^1SYSTEM", "Jugador no encontrado"}
 					})
 				else
@@ -196,12 +201,13 @@ AddEventHandler('es_admin:set', function(t, USER, GROUP)
 						local user = ESX.GetPlayerFromId(USER)
 						user.addAccountMoney('black_money', GROUP)
 					else
-						TriggerClientEvent('chat:addMessage', Source, {
+						TriggerClientEvent('chat:addMessage', src, {
 							args = {"^1SYSTEM", "Invalid integer entered"}
 						})
 					end
 				end
 		end
+	end
 end)
 
 

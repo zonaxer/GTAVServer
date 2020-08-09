@@ -66,7 +66,7 @@ CREATE TABLE `addon_account_data` (
 
 LOCK TABLES `addon_account_data` WRITE;
 /*!40000 ALTER TABLE `addon_account_data` DISABLE KEYS */;
-INSERT INTO `addon_account_data` VALUES (1,'society_ambulance',0,NULL),(2,'society_cardealer',0,NULL),(3,'society_police',0,NULL);
+INSERT INTO `addon_account_data` VALUES (1,'society_ambulance',0,NULL),(2,'society_cardealer',0,NULL),(3,'society_police',999,NULL);
 /*!40000 ALTER TABLE `addon_account_data` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -278,7 +278,7 @@ CREATE TABLE `items` (
 
 LOCK TABLES `items` WRITE;
 /*!40000 ALTER TABLE `items` DISABLE KEYS */;
-INSERT INTO `items` VALUES ('bandage','Benda',2,0,1),('beer','Cerveza',1,0,1),('bread','Pan',1,0,1),('medikit','Botiquin',2,0,1),('water','Agua',1,0,1);
+INSERT INTO `items` VALUES ('bandage','Benda',2,0,1),('beer','Cerveza',1,0,1),('bread','Pan',1,0,1),('canion','Cañon de Armas',1,0,1),('carton','Carton',1,0,1),('coca','Cocaina',1,0,1),('cocaplant','Planta de Cocaina',1,0,1),('cocaseed','Semilla de Cocaina',1,0,1),('cocawithout','Cocaina sin pastillas',1,0,1),('crack','Crack',1,0,1),('culett','Culatas de Armas',1,0,1),('grilletes','Esposas',1,0,1),('keys','Llaves de Esposas',1,0,1),('lsd','LSD',1,0,1),('lsd_pooch','LSD Embolsado',1,0,1),('medikit','Botiquin',2,0,1),('metalina','Metalina',1,0,1),('nevadito','Nevaditos',1,0,1),('opio','Opio',1,0,1),('opioplant','Planta de Opio',1,0,1),('opioseed','Semillas de Opio',1,0,1),('opiowithout','Opio sin Metalina',1,0,1),('pastillas','Pastillas',1,0,1),('scope','Mirillas de Armas',1,0,1),('shovel','Pala',1,0,1),('water','Agua',1,0,1),('weapon_shit','Piezas de Armas',1,0,1),('weed','Marihuana',1,0,1),('weed_pooch','Marihuana Embolsada',1,0,1);
 /*!40000 ALTER TABLE `items` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -308,7 +308,7 @@ CREATE TABLE `job_grades` (
 
 LOCK TABLES `job_grades` WRITE;
 /*!40000 ALTER TABLE `job_grades` DISABLE KEYS */;
-INSERT INTO `job_grades` VALUES (1,'unemployed',0,'unemployed','Unemployed',200,'{}','{}'),(2,'cardealer',0,'recruit','Recrue',10,'{}','{}'),(3,'cardealer',1,'novice','Novice',25,'{}','{}'),(4,'cardealer',2,'experienced','Experimente',40,'{}','{}'),(5,'cardealer',3,'boss','Patron',0,'{}','{}'),(6,'police',0,'recruit','Recluta',20,'{}','{}'),(7,'police',1,'officer','Oficial',40,'{}','{}'),(8,'police',2,'sergeant','Sargento',60,'{}','{}'),(9,'police',3,'lieutenant','Teniente',85,'{}','{}'),(10,'police',4,'boss','Comisario',100,'{}','{}'),(11,'ambulance',0,'ambulance','Residente',20,'{\"tshirt_2\":0,\"hair_color_1\":5,\"glasses_2\":3,\"shoes\":9,\"torso_2\":3,\"hair_color_2\":0,\"pants_1\":24,\"glasses_1\":4,\"hair_1\":2,\"sex\":0,\"decals_2\":0,\"tshirt_1\":15,\"helmet_1\":8,\"helmet_2\":0,\"arms\":92,\"face\":19,\"decals_1\":60,\"torso_1\":13,\"hair_2\":0,\"skin\":34,\"pants_2\":5}','{\"tshirt_2\":3,\"decals_2\":0,\"glasses\":0,\"hair_1\":2,\"torso_1\":73,\"shoes\":1,\"hair_color_2\":0,\"glasses_1\":19,\"skin\":13,\"face\":6,\"pants_2\":5,\"tshirt_1\":75,\"pants_1\":37,\"helmet_1\":57,\"torso_2\":0,\"arms\":14,\"sex\":1,\"glasses_2\":0,\"decals_1\":0,\"hair_2\":0,\"helmet_2\":0,\"hair_color_1\":0}'),(12,'ambulance',1,'doctor','Adjunto',40,'{\"tshirt_2\":0,\"hair_color_1\":5,\"glasses_2\":3,\"shoes\":9,\"torso_2\":3,\"hair_color_2\":0,\"pants_1\":24,\"glasses_1\":4,\"hair_1\":2,\"sex\":0,\"decals_2\":0,\"tshirt_1\":15,\"helmet_1\":8,\"helmet_2\":0,\"arms\":92,\"face\":19,\"decals_1\":60,\"torso_1\":13,\"hair_2\":0,\"skin\":34,\"pants_2\":5}','{\"tshirt_2\":3,\"decals_2\":0,\"glasses\":0,\"hair_1\":2,\"torso_1\":73,\"shoes\":1,\"hair_color_2\":0,\"glasses_1\":19,\"skin\":13,\"face\":6,\"pants_2\":5,\"tshirt_1\":75,\"pants_1\":37,\"helmet_1\":57,\"torso_2\":0,\"arms\":14,\"sex\":1,\"glasses_2\":0,\"decals_1\":0,\"hair_2\":0,\"helmet_2\":0,\"hair_color_1\":0}'),(13,'ambulance',2,'chief_doctor','Jefe de Servicio',60,'{\"tshirt_2\":0,\"hair_color_1\":5,\"glasses_2\":3,\"shoes\":9,\"torso_2\":3,\"hair_color_2\":0,\"pants_1\":24,\"glasses_1\":4,\"hair_1\":2,\"sex\":0,\"decals_2\":0,\"tshirt_1\":15,\"helmet_1\":8,\"helmet_2\":0,\"arms\":92,\"face\":19,\"decals_1\":60,\"torso_1\":13,\"hair_2\":0,\"skin\":34,\"pants_2\":5}','{\"tshirt_2\":3,\"decals_2\":0,\"glasses\":0,\"hair_1\":2,\"torso_1\":73,\"shoes\":1,\"hair_color_2\":0,\"glasses_1\":19,\"skin\":13,\"face\":6,\"pants_2\":5,\"tshirt_1\":75,\"pants_1\":37,\"helmet_1\":57,\"torso_2\":0,\"arms\":14,\"sex\":1,\"glasses_2\":0,\"decals_1\":0,\"hair_2\":0,\"helmet_2\":0,\"hair_color_1\":0}'),(14,'ambulance',3,'boss','Director',80,'{\"tshirt_2\":0,\"hair_color_1\":5,\"glasses_2\":3,\"shoes\":9,\"torso_2\":3,\"hair_color_2\":0,\"pants_1\":24,\"glasses_1\":4,\"hair_1\":2,\"sex\":0,\"decals_2\":0,\"tshirt_1\":15,\"helmet_1\":8,\"helmet_2\":0,\"arms\":92,\"face\":19,\"decals_1\":60,\"torso_1\":13,\"hair_2\":0,\"skin\":34,\"pants_2\":5}','{\"tshirt_2\":3,\"decals_2\":0,\"glasses\":0,\"hair_1\":2,\"torso_1\":73,\"shoes\":1,\"hair_color_2\":0,\"glasses_1\":19,\"skin\":13,\"face\":6,\"pants_2\":5,\"tshirt_1\":75,\"pants_1\":37,\"helmet_1\":57,\"torso_2\":0,\"arms\":14,\"sex\":1,\"glasses_2\":0,\"decals_1\":0,\"hair_2\":0,\"helmet_2\":0,\"hair_color_1\":0}');
+INSERT INTO `job_grades` VALUES (1,'unemployed',0,'unemployed','Unemployed',200,'{}','{}'),(2,'cardealer',0,'recruit','Recrue',10,'{}','{}'),(3,'cardealer',1,'novice','Novice',25,'{}','{}'),(4,'cardealer',2,'experienced','Experimente',40,'{}','{}'),(5,'cardealer',3,'boss','Patron',0,'{}','{}'),(6,'police',0,'recruit','Recluta',50,'{}','{}'),(7,'police',1,'officer','Oficial',40,'{}','{}'),(8,'police',2,'sergeant','Sargento',60,'{}','{}'),(9,'police',3,'lieutenant','Teniente',85,'{}','{}'),(10,'police',4,'boss','Comisario',100,'{}','{}'),(11,'ambulance',0,'ambulance','Residente',20,'{\"tshirt_2\":0,\"hair_color_1\":5,\"glasses_2\":3,\"shoes\":9,\"torso_2\":3,\"hair_color_2\":0,\"pants_1\":24,\"glasses_1\":4,\"hair_1\":2,\"sex\":0,\"decals_2\":0,\"tshirt_1\":15,\"helmet_1\":8,\"helmet_2\":0,\"arms\":92,\"face\":19,\"decals_1\":60,\"torso_1\":13,\"hair_2\":0,\"skin\":34,\"pants_2\":5}','{\"tshirt_2\":3,\"decals_2\":0,\"glasses\":0,\"hair_1\":2,\"torso_1\":73,\"shoes\":1,\"hair_color_2\":0,\"glasses_1\":19,\"skin\":13,\"face\":6,\"pants_2\":5,\"tshirt_1\":75,\"pants_1\":37,\"helmet_1\":57,\"torso_2\":0,\"arms\":14,\"sex\":1,\"glasses_2\":0,\"decals_1\":0,\"hair_2\":0,\"helmet_2\":0,\"hair_color_1\":0}'),(12,'ambulance',1,'doctor','Adjunto',40,'{\"tshirt_2\":0,\"hair_color_1\":5,\"glasses_2\":3,\"shoes\":9,\"torso_2\":3,\"hair_color_2\":0,\"pants_1\":24,\"glasses_1\":4,\"hair_1\":2,\"sex\":0,\"decals_2\":0,\"tshirt_1\":15,\"helmet_1\":8,\"helmet_2\":0,\"arms\":92,\"face\":19,\"decals_1\":60,\"torso_1\":13,\"hair_2\":0,\"skin\":34,\"pants_2\":5}','{\"tshirt_2\":3,\"decals_2\":0,\"glasses\":0,\"hair_1\":2,\"torso_1\":73,\"shoes\":1,\"hair_color_2\":0,\"glasses_1\":19,\"skin\":13,\"face\":6,\"pants_2\":5,\"tshirt_1\":75,\"pants_1\":37,\"helmet_1\":57,\"torso_2\":0,\"arms\":14,\"sex\":1,\"glasses_2\":0,\"decals_1\":0,\"hair_2\":0,\"helmet_2\":0,\"hair_color_1\":0}'),(13,'ambulance',2,'chief_doctor','Jefe de Servicio',60,'{\"tshirt_2\":0,\"hair_color_1\":5,\"glasses_2\":3,\"shoes\":9,\"torso_2\":3,\"hair_color_2\":0,\"pants_1\":24,\"glasses_1\":4,\"hair_1\":2,\"sex\":0,\"decals_2\":0,\"tshirt_1\":15,\"helmet_1\":8,\"helmet_2\":0,\"arms\":92,\"face\":19,\"decals_1\":60,\"torso_1\":13,\"hair_2\":0,\"skin\":34,\"pants_2\":5}','{\"tshirt_2\":3,\"decals_2\":0,\"glasses\":0,\"hair_1\":2,\"torso_1\":73,\"shoes\":1,\"hair_color_2\":0,\"glasses_1\":19,\"skin\":13,\"face\":6,\"pants_2\":5,\"tshirt_1\":75,\"pants_1\":37,\"helmet_1\":57,\"torso_2\":0,\"arms\":14,\"sex\":1,\"glasses_2\":0,\"decals_1\":0,\"hair_2\":0,\"helmet_2\":0,\"hair_color_1\":0}'),(14,'ambulance',3,'boss','Director',80,'{\"tshirt_2\":0,\"hair_color_1\":5,\"glasses_2\":3,\"shoes\":9,\"torso_2\":3,\"hair_color_2\":0,\"pants_1\":24,\"glasses_1\":4,\"hair_1\":2,\"sex\":0,\"decals_2\":0,\"tshirt_1\":15,\"helmet_1\":8,\"helmet_2\":0,\"arms\":92,\"face\":19,\"decals_1\":60,\"torso_1\":13,\"hair_2\":0,\"skin\":34,\"pants_2\":5}','{\"tshirt_2\":3,\"decals_2\":0,\"glasses\":0,\"hair_1\":2,\"torso_1\":73,\"shoes\":1,\"hair_color_2\":0,\"glasses_1\":19,\"skin\":13,\"face\":6,\"pants_2\":5,\"tshirt_1\":75,\"pants_1\":37,\"helmet_1\":57,\"torso_2\":0,\"arms\":14,\"sex\":1,\"glasses_2\":0,\"decals_1\":0,\"hair_2\":0,\"helmet_2\":0,\"hair_color_1\":0}');
 /*!40000 ALTER TABLE `job_grades` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -374,7 +374,7 @@ CREATE TABLE `owned_properties` (
   `rented` int(11) NOT NULL,
   `owner` varchar(60) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -409,7 +409,7 @@ CREATE TABLE `owned_vehicles` (
   PRIMARY KEY (`plate`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `vehsowned` (`owner`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -638,6 +638,102 @@ CREATE TABLE `society_moneywash` (
 LOCK TABLES `society_moneywash` WRITE;
 /*!40000 ALTER TABLE `society_moneywash` DISABLE KEYS */;
 /*!40000 ALTER TABLE `society_moneywash` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tm1_enclosures`
+--
+
+DROP TABLE IF EXISTS `tm1_enclosures`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tm1_enclosures` (
+  `enclosure_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `groupid` int(11) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tm1_enclosures`
+--
+
+LOCK TABLES `tm1_enclosures` WRITE;
+/*!40000 ALTER TABLE `tm1_enclosures` DISABLE KEYS */;
+INSERT INTO `tm1_enclosures` VALUES ('Asentamiento Monte Chiliad',4469),('Monte Gordo',2378),('Campamento Altruista',4028),('Reyes Palace',NULL),('Alamo Sea',4654),('Reyes Palace',4477);
+/*!40000 ALTER TABLE `tm1_enclosures` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tm1_groups`
+--
+
+DROP TABLE IF EXISTS `tm1_groups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tm1_groups` (
+  `groupid` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `aprove` int(1) DEFAULT '0',
+  `money` int(11) DEFAULT '0',
+  PRIMARY KEY (`groupid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tm1_groups`
+--
+
+LOCK TABLES `tm1_groups` WRITE;
+/*!40000 ALTER TABLE `tm1_groups` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tm1_groups` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tm1_membersgroups`
+--
+
+DROP TABLE IF EXISTS `tm1_membersgroups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tm1_membersgroups` (
+  `groupid` int(11) DEFAULT '0',
+  `identifier` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `rank` int(1) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tm1_membersgroups`
+--
+
+LOCK TABLES `tm1_membersgroups` WRITE;
+/*!40000 ALTER TABLE `tm1_membersgroups` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tm1_membersgroups` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tm1_plants`
+--
+
+DROP TABLE IF EXISTS `tm1_plants`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tm1_plants` (
+  `name` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT '',
+  `label` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT '',
+  `object` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT '',
+  `finalobject` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tm1_plants`
+--
+
+LOCK TABLES `tm1_plants` WRITE;
+/*!40000 ALTER TABLE `tm1_plants` DISABLE KEYS */;
+INSERT INTO `tm1_plants` VALUES ('cocaseed','Cocaina','Prop_weed_01','cocaplant');
+/*!40000 ALTER TABLE `tm1_plants` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -871,4 +967,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-23  0:33:29
+-- Dump completed on 2020-07-29  1:31:14

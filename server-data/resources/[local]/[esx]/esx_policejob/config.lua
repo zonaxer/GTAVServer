@@ -127,7 +127,9 @@ Config.AuthorizedWeapons = {
 
 Config.AuthorizedVehicles = {
 	car = {
-		recruit = {},
+		recruit = {
+			{model = 'police', price = 100}
+		},
 
 		officer = {
 			{model = 'police3', price = 20000}

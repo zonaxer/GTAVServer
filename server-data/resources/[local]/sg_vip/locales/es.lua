@@ -8,5 +8,6 @@ Locales['es'] = {
     ['recivo_coronas'] = 'Has recibido ~y~%s~s~ coronas y tienes un total de ~g~%s~s~ Coronas',
     ['quito_coronas'] = 'Te han quitado ~y~%s~s~ coronas y tienes un total de ~g~%s~s~ Coronas',
     ['playerId'] = 'El ID del jugador',
-    ['numero_coronas'] = 'Numero de coronas para añadir al jugador'
+    ['numero_coronas'] = 'Numero de coronas para añadir al jugador',
+    ['vehicle_belongs']         = 'Un vehículo con matrícula ~y~%s~s~ ahora es de tu ~b~propiedad~s~',
 }

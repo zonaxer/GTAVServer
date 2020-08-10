@@ -14,6 +14,7 @@ Config.PlateLetters  = 3
 Config.PlateNumbers  = 3
 Config.PlateUseSpace = true
 
+
 Config.Zones = {
 
 	ShopEntering = {

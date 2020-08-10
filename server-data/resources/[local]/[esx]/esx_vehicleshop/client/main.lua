@@ -214,10 +214,10 @@ function OpenShopMenu()
 			if data2.current.value == 'yes' then
 				if not wait then
 					wait = true
+					local generatedPlate = GeneratePlate()
 					if(vehicleData.category == 'vip') then
-						ESX.TriggerServerCallback('sg_vip:comprar', function ( comprado ) 
+						ESX.TriggerServerCallback('sg_vip:comprarVehiculo', function ( comprado ) 
 							if comprado then
-								local generatedPlate = GeneratePlate()
 								IsInShopMenu = false
 								menu2.close()
 								menu.close()
@@ -235,7 +235,7 @@ function OpenShopMenu()
 								wait = false
 								ESX.ShowNotification('No tienes Coronas.')
 							end
-						end, vehicleData.price)
+						end, vehicleData.model, generatedPlate)
 					else
 						-- El vehiculo no es VIP
 						if Config.EnablePlayerManagement then
@@ -264,7 +264,6 @@ function OpenShopMenu()
 								end
 							end, vehicleData.model)
 						else
-							local generatedPlate = GeneratePlate()
 	
 							ESX.TriggerServerCallback('esx_vehicleshop:buyVehicle', function(success)
 								if success then

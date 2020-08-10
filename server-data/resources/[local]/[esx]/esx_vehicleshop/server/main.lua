@@ -323,19 +323,23 @@ end)
 
 ESX.RegisterServerCallback('esx_vehicleshop:resellVehicle', function(source, cb, plate, model)
 	
-	local xPlayer, resellPrice = ESX.GetPlayerFromId(source)
+	local xPlayer, resellPrice, vehicleCategory = ESX.GetPlayerFromId(source)
 	
 	if (xPlayer.job.name == 'cardealer') or (not Config.EnablePlayerManagement) then
 		-- calculate the resell price
-		
+
 		for i=1, #vehicles, 1 do
 			if GetHashKey(vehicles[i].model) == model then
 				resellPrice = ESX.Math.Round(vehicles[i].price / 100 * Config.ResellPercentage)
+				vehicleCategory = vehicles[i].category
 				break
 			end
 		end
-
-		if not resellPrice then
+		-- Comprobamos si es coche vip y no dejamos venderlo
+		if vehicleCategory == 'vip' then
+			xPlayer.showNotification('No se puede vender un coche VIP.')
+			cb(false)
+		elseif not resellPrice then
 			print(('[esx_vehicleshop] [^3WARNING^7] %s attempted to sell an unknown vehicle!'):format(xPlayer.identifier))
 			cb(false)
 		else

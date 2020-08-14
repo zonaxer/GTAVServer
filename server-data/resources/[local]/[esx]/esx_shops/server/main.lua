@@ -59,7 +59,14 @@ AddEventHandler('esx_shops:buyItem', function(itemName, amount, zone)
 		-- can the player carry the said amount of x item?
 		if xPlayer.canCarryItem(itemName, amount) then
 			xPlayer.removeMoney(price)
-			xPlayer.addInventoryItem(itemName, amount)
+
+			if itemName == 'bulletproof' then
+				--dale armadura
+				TriggerClientEvent('esx_extraitems:bulletproof', _source)
+			else
+				xPlayer.addInventoryItem(itemName, amount)
+			end
+			
 			xPlayer.showNotification(_U('bought', amount, itemLabel, ESX.Math.GroupDigits(price)))
 		else
 			xPlayer.showNotification(_U('player_cannot_hold'))

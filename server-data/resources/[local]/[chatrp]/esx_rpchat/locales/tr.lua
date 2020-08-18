@@ -1,0 +1,15 @@
+Locales['tr'] = {
+	['ooc_help'] = 'Rol dışı mesajınızı yazın.',
+	['ooc_prefix'] = 'OOC | %s',
+	['twt_help'] = 'Tweet at',
+	['twt_prefix'] = '^0[^4Twitter^0] (^5@%s^0)',
+	['me_help'] = 'kişisel aksion',
+	['me_prefix'] = 'me | %s',
+	['do_help'] = 'Rp hakkında',
+	['do_prefix'] = 'do | %s',
+	['news_help'] = 'haber duyurusu (Kötüye kullanmayın)',
+	['news_prefix'] = 'haberler | %s',
+	['ooc_argument_name'] = 'mesaj',
+	['ooc_argument_help'] = 'mesajı girin',
+	['ooc_unknown_command'] = '^3%s^0 bilinmeyen komut!',
+}

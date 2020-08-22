@@ -80,5 +80,34 @@ ESX.RegisterServerCallback('sg_vip:comprarVehiculo', function( source, cb, model
   end
 end)
 
+RegisterServerEvent('sg_vip:balance')
+AddEventHandler('sg_vip:balance', function()
+  local balance = {}
+  local _source = source
+  local xPlayer = ESX.GetPlayerFromId(_source)
+  balance.coronas = xPlayer.getAccount('coronas').money
+  balance.valorCorona = Config.DineroPorCoronas
+  
+
+    TriggerClientEvent('sg_vip:showBalance', _source, balance)
+
+end)
 
 
+RegisterServerEvent('sg_vip:cambiaCoronas')
+AddEventHandler('sg_vip:cambiaCoronas', function(data)
+  local _source = source
+  local xPlayer = ESX.GetPlayerFromId(_source)
+
+  if tonumber(data.cantidad) <= xPlayer.getAccount('coronas').money then
+    xPlayer.removeAccountMoney('coronas', tonumber(data.cantidad))
+    local totalBanco = tonumber(data.cantidad) * tonumber(data.valorCorona)
+    xPlayer.addAccountMoney('bank', totalBanco)
+    xPlayer.showNotification('El cambio de coronas se ha efectuado con exito. Acercate a un cajero para recoger tu dinero.')
+
+  else
+    local missingMoney = tonumber(data.cantidad) -  xPlayer.getAccount('coronas').money
+    xPlayer.showNotification(_U('not_enough', ESX.Math.GroupDigits(missingMoney)))
+  end
+
+end)

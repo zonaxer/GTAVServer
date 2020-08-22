@@ -57,7 +57,7 @@ CREATE TABLE `addon_account_data` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_addon_account_data_account_name_owner` (`account_name`,`owner`),
   KEY `index_addon_account_data_account_name` (`account_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -177,6 +177,32 @@ LOCK TABLES `cardealer_vehicles` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `companies`
+--
+
+DROP TABLE IF EXISTS `companies`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `companies` (
+  `name` varchar(50) COLLATE utf8mb4_bin NOT NULL,
+  `label` varchar(50) COLLATE utf8mb4_bin NOT NULL,
+  `investRate` float DEFAULT NULL,
+  `rate` varchar(10) COLLATE utf8mb4_bin NOT NULL DEFAULT 'stale',
+  PRIMARY KEY (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `companies`
+--
+
+LOCK TABLES `companies` WRITE;
+/*!40000 ALTER TABLE `companies` DISABLE KEYS */;
+INSERT INTO `companies` VALUES ('24/7','TNYFVN',-2.62,'down'),('Ammu-Nation','AMNA',2.86,'up'),('Augury Insurance','AUGIN',-3.2,'down'),('Coronas','CRN',-4.91,'down'),('Downtown Cab Co.','DCC',1.18,'down'),('ECola','ECLA',1.21,'down'),('Fleeca','FLCA',-2.42,'down'),('Globe Oil','GLBO',-0.04,'down'),('GoPostal','GPSTL',0.81,'down'),('Lifeinvader','LIVDR',1.98,'up'),('Los Santos Air','LSA',-0.81,'up'),('Los Santos Customs','LSC',4.61,'up'),('Los Santos Transit','LST',4.58,'up'),('Maze Bank','MBANK',-1.11,'up'),('Post OP','PSTP',-0.48,'down'),('RON','RON',3.3,'up'),('Up-n-Atom Burger','UNAB',1,'down'),('Weazel','NEWS',-2.35,'down');
+/*!40000 ALTER TABLE `companies` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `datastore`
 --
 
@@ -216,7 +242,7 @@ CREATE TABLE `datastore_data` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_datastore_data_name_owner` (`name`,`owner`),
   KEY `index_datastore_data_name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -256,6 +282,36 @@ INSERT INTO `fine_types` VALUES (1,'Mal uso de claxon',250,0),(2,'Giro indebido'
 UNLOCK TABLES;
 
 --
+-- Table structure for table `invest`
+--
+
+DROP TABLE IF EXISTS `invest`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `invest` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `identifier` varchar(40) COLLATE utf8mb4_bin NOT NULL,
+  `amount` float NOT NULL,
+  `rate` float NOT NULL,
+  `job` varchar(50) COLLATE utf8mb4_bin NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `sold` datetime DEFAULT NULL,
+  `soldAmount` float DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `invest`
+--
+
+LOCK TABLES `invest` WRITE;
+/*!40000 ALTER TABLE `invest` DISABLE KEYS */;
+/*!40000 ALTER TABLE `invest` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `items`
 --
 
@@ -268,6 +324,7 @@ CREATE TABLE `items` (
   `weight` int(11) NOT NULL DEFAULT '1',
   `rare` tinyint(4) NOT NULL DEFAULT '0',
   `can_remove` tinyint(4) NOT NULL DEFAULT '1',
+  `limit` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -278,7 +335,7 @@ CREATE TABLE `items` (
 
 LOCK TABLES `items` WRITE;
 /*!40000 ALTER TABLE `items` DISABLE KEYS */;
-INSERT INTO `items` VALUES ('bandage','Benda',2,0,1),('beer','Cerveza',1,0,1),('binoculars','Binoculars',1,0,1),('bread','Pan',1,0,1),('bulletproof','Bullet-Proof Vest',1,0,1),('canion','Cañon de Armas',1,0,1),('carton','Carton',1,0,1),('coca','Cocaina',1,0,1),('cocaplant','Planta de Cocaina',1,0,1),('cocaseed','Semilla de Cocaina',1,0,1),('cocawithout','Cocaina sin pastillas',1,0,1),('crack','Crack',1,0,1),('culett','Culatas de Armas',1,0,1),('darknet','Dark Net',1,0,1),('drill','Drill',1,0,1),('firstaidkit','First Aid Kit',1,0,1),('grilletes','Esposas',1,0,1),('hifi','HiFi',1,0,1),('keys','Llaves de Esposas',1,0,1),('lockpick','Lock Pick',1,0,1),('lsd','LSD',1,0,1),('lsd_pooch','LSD Embolsado',1,0,1),('medikit','Botiquin',2,0,1),('metalina','Metalina',1,0,1),('nevadito','Nevaditos',1,0,1),('opio','Opio',1,0,1),('opioplant','Planta de Opio',1,0,1),('opioseed','Semillas de Opio',1,0,1),('opiowithout','Opio sin Metalina',1,0,1),('oxygenmask','Oxygen Mask',1,0,1),('pastillas','Pastillas',1,0,1),('phone','Móvil',1,0,1),('repairkit','Repair Kit',1,0,1),('scope','Mirillas de Armas',1,0,1),('shovel','Pala',1,0,1),('sim_card','SIM',1,0,1),('tirekit','Tire Kit',1,0,1),('vehgps','Vehicle GPS',1,0,1),('water','Agua',1,0,1),('weabox','Weapon Box',1,0,1),('weaclip','Weapon Clip',1,0,1),('weapon_shit','Piezas de Armas',1,0,1),('weed','Marihuana',1,0,1),('weed_pooch','Marihuana Embolsada',1,0,1);
+INSERT INTO `items` VALUES ('bandage','Benda',2,0,1,1),('beer','Cerveza',1,0,1,1),('binoculars','Binoculars',1,0,1,1),('bread','Pan',1,0,1,50),('bulletproof','Bullet-Proof Vest',1,0,1,1),('canion','Cañon de Armas',1,0,1,1),('carton','Carton',1,0,1,1),('coca','Cocaina',1,0,1,1),('cocaplant','Planta de Cocaina',1,0,1,1),('cocaseed','Semilla de Cocaina',1,0,1,1),('cocawithout','Cocaina sin pastillas',1,0,1,1),('crack','Crack',1,0,1,1),('culett','Culatas de Armas',1,0,1,1),('darknet','Dark Net',1,0,1,1),('drill','Drill',1,0,1,1),('firstaidkit','First Aid Kit',1,0,1,1),('grilletes','Esposas',1,0,1,1),('hifi','HiFi',1,0,1,1),('keys','Llaves de Esposas',1,0,1,1),('lockpick','Lock Pick',1,0,1,1),('lsd','LSD',1,0,1,1),('lsd_pooch','LSD Embolsado',1,0,1,1),('medikit','Botiquin',2,0,1,1),('metalina','Metalina',1,0,1,1),('nevadito','Nevaditos',1,0,1,1),('opio','Opio',1,0,1,1),('opioplant','Planta de Opio',1,0,1,1),('opioseed','Semillas de Opio',1,0,1,1),('opiowithout','Opio sin Metalina',1,0,1,1),('oxygenmask','Oxygen Mask',1,0,1,1),('pastillas','Pastillas',1,0,1,1),('phone','Móvil',1,0,1,1),('repairkit','Repair Kit',1,0,1,1),('scope','Mirillas de Armas',1,0,1,1),('shovel','Pala',1,0,1,1),('sim_card','SIM',1,0,1,1),('tirekit','Tire Kit',1,0,1,1),('vehgps','Vehicle GPS',1,0,1,1),('water','Agua',1,0,1,1),('weabox','Weapon Box',1,0,1,1),('weaclip','Weapon Clip',1,0,1,1),('weapon_shit','Piezas de Armas',1,0,1,1),('weed','Marihuana',1,0,1,1),('weed_pooch','Marihuana Embolsada',1,0,1,1);
 /*!40000 ALTER TABLE `items` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -761,6 +818,35 @@ INSERT INTO `tm1_plants` VALUES ('cocaseed','Cocaina','Prop_weed_01','cocaplant'
 UNLOCK TABLES;
 
 --
+-- Table structure for table `truck_inventory`
+--
+
+DROP TABLE IF EXISTS `truck_inventory`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `truck_inventory` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `item` varchar(100) NOT NULL,
+  `count` int(11) NOT NULL,
+  `plate` varchar(8) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `owned` varchar(255) NOT NULL,
+  `itemt` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `item` (`item`,`plate`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `truck_inventory`
+--
+
+LOCK TABLES `truck_inventory` WRITE;
+/*!40000 ALTER TABLE `truck_inventory` DISABLE KEYS */;
+/*!40000 ALTER TABLE `truck_inventory` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `twitter_accounts`
 --
 
@@ -1019,4 +1105,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-08-19  1:14:54
+-- Dump completed on 2020-08-22  2:20:27

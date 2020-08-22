@@ -10,4 +10,5 @@ Locales['es'] = {
     ['playerId'] = 'El ID del jugador',
     ['numero_coronas'] = 'Numero de coronas para añadir al jugador',
     ['vehicle_belongs']         = 'Un vehículo con matrícula ~y~%s~s~ ahora es de tu ~b~propiedad~s~',
+    ['not_enough'] = 'No tienes ~r~suficiente~s~ dinero, te ~y~falta~s~ ~r~%s~s~ Coronas!',
 }

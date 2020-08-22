@@ -161,6 +161,7 @@ function loadESXPlayer(identifier, playerId)
 					weight = item.weight,
 					usable = ESX.UsableItemsCallbacks[name] ~= nil,
 					rare = item.rare,
+					limit = item.limit,
 					canRemove = item.canRemove
 				})
 			end

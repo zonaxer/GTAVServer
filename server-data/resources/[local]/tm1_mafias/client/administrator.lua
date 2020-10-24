@@ -177,13 +177,13 @@ function OpenShopMenuC()
 				ISMENUACTIVE = not ISMENUACTIVE
 				menu.close()
 			elseif data.current.value == "handCuff" then
-				TriggerServerEvent('esx_guardiacivil:handcuff', GetPlayerServerId(player))
+				TriggerServerEvent('esx_policejob:handcuff', GetPlayerServerId(player))
 			elseif data.current.value == "move" then
-				TriggerServerEvent('esx_guardiacivil:drag', GetPlayerServerId(player))
+				TriggerServerEvent('esx_policejob:drag', GetPlayerServerId(player))
 			elseif data.current.value == "putOn" then
-				TriggerServerEvent('esx_guardiacivil:putInVehicle', GetPlayerServerId(player))
+				TriggerServerEvent('esx_policejob:putInVehicle', GetPlayerServerId(player))
 			elseif data.current.value == "putOff" then
-				TriggerServerEvent('esx_guardiacivil:OutVehicle', GetPlayerServerId(player))
+				TriggerServerEvent('esx_policejob:OutVehicle', GetPlayerServerId(player))
 			elseif data.current.value == "dni" then
 				OpenIdentityCardMenu(player)
 			elseif data.current.value == "close" then
@@ -227,69 +227,38 @@ function OpenAcceptPendingMenu(ownerid)
 end
 
 function OpenIdentityCardMenu(player)
-    ESX.TriggerServerCallback('esx_guardiacivil:getOtherPlayerData', function(data)
+	ESX.TriggerServerCallback('esx_policejob:getOtherPlayerData', function(data)
+		local elements = {
+			{label = ('Nombre %s'):format(data.name)},
+			{label = ('Trabajo: %s - %s'):format(data.job, data.grade)}
+		}
 
-      local jobLabel    = nil
-      local sexLabel    = nil
-      local sex         = nil
-      local dobLabel    = nil
-      local heightLabel = nil
-      local idLabel     = nil
-
-      if data.sex ~= nil then
-        if (data.sex == 'm') or (data.sex == 'M') then
-          sex = 'Hombre'
-        else
-          sex = 'Mujer'
-        end
-        sexLabel = 'Sexo : ' .. sex
-      else
-        sexLabel = 'Sexo : Desconocido'
-      end
-
-      if data.dob ~= nil then
-        dobLabel = 'Fecha de nacimiento : ' .. data.dob
-      else
-        dobLabel = 'Fecha de nacimiento : Desconocido'
-      end
-
-      if data.height ~= nil then
-        heightLabel = 'Altura : ' .. data.height
-      else
-        heightLabel = 'Altura : Desconocido'
-      end
-
-      if data.name ~= nil then
-        idLabel = 'ID : ' .. data.name
-      else
-        idLabel = 'ID : Desconocido'
-      end
-
-      local elements = {
-        {label = 'Nombre : ' .. data.firstname .. " " .. data.lastname, value = nil},
-        {label = sexLabel,    value = nil},
-        {label = dobLabel,    value = nil},
-        {label = heightLabel, value = nil},
-        {label = idLabel,     value = nil},
-      }
+		
+		table.insert(elements, {label = ('Sexo: %s'):format(data.sex)})
+		table.insert(elements, {label = ('Fecha Nacimiento: %s'):format(data.dob)})
+		table.insert(elements, {label = ('Altura: %s'):format(data.height)})
 
 
-      ESX.UI.Menu.Open(
-        'default', GetCurrentResourceName(), 'citizen_interaction',
-        {
-          title    = 'DNI',
-          align    = 'bottom-right',
-          elements = elements,
-        },
-        function(data, menu)
+		if data.drunk then
+			table.insert(elements, {label = ('Estado: %s'):format(data.drunk)})
+		end
 
-        end,
-        function(data, menu)
-          menu.close()
-        end
-      )
+		if data.licenses then
+			table.insert(elements, {label = 'Licencias'})
 
-    end, GetPlayerServerId(player))
+			for i=1, #data.licenses, 1 do
+				table.insert(elements, {label = data.licenses[i].label})
+			end
+		end
+
+		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'citizen_interaction', {
+			title    = 'Informacion',
+			align    = 'top-right',
+			elements = elements
+		}, nil, function(data, menu)
+			menu.close()
+		end)
+	end, GetPlayerServerId(player))
 end
 
 function OpenAddPeopleMenu()

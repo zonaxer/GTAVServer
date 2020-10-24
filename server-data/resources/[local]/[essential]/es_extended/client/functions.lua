@@ -762,19 +762,21 @@ ESX.ShowInventory = function()
 	local elements, currentWeight = {}, 0
 
 	for k,v in pairs(ESX.PlayerData.accounts) do
-		if v.money > 0 then
-			local formattedMoney = _U('locale_currency', ESX.Math.GroupDigits(v.money))
-			local canDrop = v.name ~= 'bank'
+		if v.label ~= 'coronas' then 
+			if v.money > 0 then
+				local formattedMoney = _U('locale_currency', ESX.Math.GroupDigits(v.money))
+				local canDrop = v.name ~= 'bank'
 
-			table.insert(elements, {
-				label = ('%s: <span style="color:green;">%s</span>'):format(v.label, formattedMoney),
-				count = v.money,
-				type = 'item_account',
-				value = v.name,
-				usable = false,
-				rare = false,
-				canRemove = canDrop
-			})
+				table.insert(elements, {
+					label = ('%s: <span style="color:green;">%s</span>'):format(v.label, formattedMoney),
+					count = v.money,
+					type = 'item_account',
+					value = v.name,
+					usable = false,
+					rare = false,
+					canRemove = canDrop
+				})
+			end
 		end
 	end
 

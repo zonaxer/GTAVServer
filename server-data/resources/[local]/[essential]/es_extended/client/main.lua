@@ -11,6 +11,9 @@ Citizen.CreateThread(function()
 	end
 end)
 
+local cam = nil
+local cam2 = nil
+
 RegisterNetEvent('esx:playerLoaded')
 AddEventHandler('esx:playerLoaded', function(playerData)
 	ESX.PlayerLoaded = true
@@ -63,19 +66,47 @@ AddEventHandler('esx:playerLoaded', function(playerData)
 	ESX.Game.Teleport(PlayerPedId(), {
 		x = playerData.coords.x,
 		y = playerData.coords.y,
-		z = playerData.coords.z + 0.25,
+		z = playerData.coords.z + 0.4,
 		heading = playerData.coords.heading
 	}, function()
+
+
 		TriggerServerEvent('esx:onPlayerSpawn')
 		TriggerEvent('esx:onPlayerSpawn')
 		TriggerEvent('playerSpawned') -- compatibility with old scripts, will be removed soon
 		TriggerEvent('esx:restoreLoadout')
 
 		Citizen.Wait(4000)
+		
+		-- codigo de zoom
+		DoScreenFadeIn(500)
+		Citizen.Wait(500)
+		cam2 = CreateCamWithParams("DEFAULT_SCRIPTED_CAMERA", -1355.93,-1487.78,520.75, 300.00,0.00,0.00, 100.00, false, 0)
+		PointCamAtCoord(cam2, playerData.coords.x, playerData.coords.y, playerData.coords.z+200)
+		SetCamActiveWithInterp(cam2, cam, 900, true, true)
+		Citizen.Wait(900)
+
+		cam = CreateCamWithParams("DEFAULT_SCRIPTED_CAMERA", playerData.coords.x, playerData.coords.y, playerData.coords.z+200, 300.00,0.00,0.00, 100.00, false, 0)
+		PointCamAtCoord(cam, playerData.coords.x, playerData.coords.y, playerData.coords.z+2)
+		SetCamActiveWithInterp(cam, cam2, 3700, true, true)
+		Citizen.Wait(3700)
+		PlaySoundFrontend(-1, "Zoom_Out", "DLC_HEIST_PLANNING_BOARD_SOUNDS", 1)
+		RenderScriptCams(false, true, 500, true, true)
+		PlaySoundFrontend(-1, "CAR_BIKE_WHOOSH", "MP_LOBBY_SOUNDS", 1)
+		--FreezeEntityPosition(GetPlayerPed(-1), false)
+		FreezeEntityPosition(PlayerPedId(), false)
+		Citizen.Wait(500)
+		SetCamActive(cam, false)
+		SetCamActive(cam2, false)
+		DestroyCam(cam, true)
+		DestroyCam(cam2, true)
+		cam = nil
+		cam2 = nil
+		--- zomm
+
 		ShutdownLoadingScreen()
 		ShutdownLoadingScreenNui()
-		FreezeEntityPosition(PlayerPedId(), false)
-		DoScreenFadeIn(10000)
+		
 		StartServerSyncLoops()
 	end)
 
